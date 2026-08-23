@@ -51,22 +51,25 @@ export default function Dashboard() {
 
       // Refresh selected incident if one was selected
       if (selectedIncident) {
-        const refreshed = loadedIncs.find(i => i.incident_id === selectedIncident.incident_id);
-        if (refreshed) {
-          setSelectedIncident(refreshed);
-          // Set pipeline stages from the loaded incident state
-          const refreshedStages = buildPipelineStages({
-            perception: { status: 'complete', result: refreshed.perception_results[0] || {} },
-            clustering: { status: 'complete', result: { cluster_size: refreshed.cluster.report_count } },
-            memory: { status: 'complete', result: refreshed.memory_profile || {} },
-            incident_detection: { status: 'complete', result: { classification: refreshed.classification } },
-            root_cause: { status: 'complete', result: refreshed.root_cause },
-            impact: { status: 'complete', result: refreshed.impact_score },
-            economic: { status: 'complete', result: refreshed.economic_impact || {} },
-            response: { status: 'complete', result: refreshed.response_plan },
-            filing: { status: 'complete', result: { status: 'complete' } },
-          } as any);
-          setPipelineStages(refreshedStages);
+        try {
+          const fullInc = await api.getIncident(selectedIncident.incident_id);
+          if (fullInc) {
+            setSelectedIncident(fullInc);
+            const refreshedStages = buildPipelineStages({
+              perception: { status: 'complete', result: fullInc.perception_results?.[0] || {} },
+              clustering: { status: 'complete', result: { cluster_size: fullInc.cluster?.report_count } },
+              memory: { status: 'complete', result: fullInc.memory_profile || {} },
+              incident_detection: { status: 'complete', result: { classification: fullInc.classification } },
+              root_cause: { status: 'complete', result: fullInc.root_cause },
+              impact: { status: 'complete', result: fullInc.impact_score },
+              economic: { status: 'complete', result: fullInc.economic_impact || {} },
+              response: { status: 'complete', result: fullInc.response_plan },
+              filing: { status: 'complete', result: { status: 'complete' } },
+            } as any);
+            setPipelineStages(refreshedStages);
+          }
+        } catch (e) {
+          console.error("Failed to refresh selected incident", e);
         }
       }
     } catch (err) {
@@ -392,7 +395,7 @@ export default function Dashboard() {
                   Geo-Temporal Cluster Context
                 </h3>
                 <p style={{ fontSize: 12, color: 'var(--text-secondary)', lineHeight: 1.4, marginBottom: 10 }}>
-                  Geo-temporal proximity model connected <strong>{selectedIncident.connected_reports.length} citizen complaints</strong> within a <strong>{selectedIncident.cluster.radius_m} meter radius</strong>.
+                  Geo-temporal proximity model connected <strong>{(selectedIncident.connected_reports || []).length} citizen complaints</strong> within a <strong>{selectedIncident.cluster?.radius_m || 0} meter radius</strong>.
                 </p>
                 <div style={{
                   display: 'grid',
@@ -400,7 +403,7 @@ export default function Dashboard() {
                   gap: 10,
                   marginTop: 6,
                 }}>
-                  {selectedIncident.perception_results.map((p, idx) => (
+                  {(selectedIncident.perception_results || []).map((p, idx) => (
                     <div key={idx} style={{
                       background: 'var(--bg-primary)',
                       border: '1px solid var(--border-primary)',
