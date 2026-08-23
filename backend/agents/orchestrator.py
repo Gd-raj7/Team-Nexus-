@@ -17,6 +17,7 @@ from agents.incident import detect_incident
 from agents.root_cause import investigate_root_cause
 from agents.impact import assess_impact
 from agents.economic import evaluate_economic_impact
+from agents.memory import evaluate_memory
 from agents.response import create_response_plan
 from agents.filing import file_complaint
 
@@ -276,6 +277,20 @@ async def run_full_pipeline(report: Dict[str, Any]) -> Dict[str, Any]:
         "result": economic_result["economic_impact"],
     }
     pipeline_result["agent_logs"].append(economic_result["agent_log"])
+
+    # ── Stage 6.6: CIVIC SPATIAL MEMORY & RECURRENCE ─────────────────────
+    existing_incidents = _load_json("incidents.json").get("incidents", [])
+    complaints_pool = _load_json("complaints.json").get("reports", [])
+    memory_result = await evaluate_memory(
+        incident_context=incident,
+        complaints_pool=complaints_pool,
+        all_incidents=existing_incidents,
+    )
+    incident["memory_profile"] = memory_result
+    pipeline_result["stages"]["memory"] = {
+        "status": "complete",
+        "result": memory_result,
+    }
 
     # ── Stage 7: RESPONSE PLAN ───────────────────────────────────────────
     response_result = await create_response_plan(

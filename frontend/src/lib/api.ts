@@ -71,6 +71,37 @@ export interface EconomicImpact {
   cost_benefit_summary: string;
 }
 
+export interface MemoryProfile {
+  total_historical_reports: number;
+  chronic_recurrence_score: number;
+  primary_vulnerability: string;
+  civic_memory_insight: string;
+  historical_incidents: Array<{
+    incident_id: string;
+    status: string;
+    created_at: string;
+    root_cause: string;
+    distance_m: number;
+  }>;
+  past_interventions: Array<{
+    incident_id: string;
+    department: string;
+    action: string;
+    approved_at: string;
+    status: string;
+  }>;
+}
+
+export interface HotspotItem {
+  zone: string;
+  center_lat: number;
+  center_lon: number;
+  active_reports_count: number;
+  risk_tier: 'CRITICAL' | 'HIGH' | 'MODERATE' | 'LOW';
+  active_incidents_count: number;
+  sample_address: string;
+}
+
 export interface IncidentContext {
   incident_id: string;
   status: string;
@@ -100,6 +131,7 @@ export interface IncidentContext {
     explanation: string;
   };
   economic_impact?: EconomicImpact;
+  memory_profile?: MemoryProfile;
   response_plan: {
     steps: ResponseStep[];
     rationale: string;
@@ -205,6 +237,8 @@ export const api = {
   getIncidents: () => fetchJson('/incidents'),
   getIncident: (id: string): Promise<IncidentContext> => fetchJson(`/incidents/${id}`),
   getImpact: (id: string) => fetchJson(`/incidents/${id}/impact`),
+  getEconomicImpact: (id: string) => fetchJson(`/incidents/${id}/economic-impact`),
+  getIncidentMemory: (id: string): Promise<MemoryProfile> => fetchJson(`/incidents/${id}/memory`),
   getResponsePlan: (id: string) => fetchJson(`/incidents/${id}/response-plan`),
 
   approvePlan: (id: string) => fetchJson(`/incidents/${id}/approve-plan`, { method: 'POST' }),
@@ -227,8 +261,13 @@ export const api = {
       body: JSON.stringify({ hours }),
     }),
 
-  // Dashboard & Logs
+  // Dashboard & Analytics
   getStats: (): Promise<DashboardStats> => fetchJson('/dashboard/stats'),
+  getHotspots: (): Promise<{ hotspots: HotspotItem[]; total_hotspots: number; critical_hotspots_count: number }> =>
+    fetchJson('/dashboard/hotspots'),
+  getRecurring: () => fetchJson('/dashboard/recurring'),
+  getLocationHistory: (lat: number, lon: number, radius_m: number = 250) =>
+    fetchJson(`/memory/location-history?lat=${lat}&lon=${lon}&radius_m=${radius_m}`),
   getAgentLogs: () => fetchJson('/agent-logs'),
 
   // Dev

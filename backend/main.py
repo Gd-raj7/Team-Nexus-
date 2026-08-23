@@ -406,6 +406,16 @@ async def get_incident_economic_impact(incident_id: str):
     raise HTTPException(status_code=404, detail=f"Incident {incident_id} not found")
 
 
+@app.get("/incidents/{incident_id}/memory")
+async def get_incident_memory(incident_id: str):
+    """Get civic spatial memory, recurrence scores, and historical interventions for an incident."""
+    data = load_incidents()
+    for inc in data.get("incidents", []):
+        if inc["incident_id"] == incident_id:
+            return inc.get("memory_profile", {})
+    raise HTTPException(status_code=404, detail=f"Incident {incident_id} not found")
+
+
 @app.get("/incidents/{incident_id}/response-plan")
 async def get_response_plan(incident_id: str):
     """Get response plan for an incident."""
@@ -603,6 +613,50 @@ async def get_dashboard_stats():
         "escalated_incidents": len(escalated),
         "total_estimated_savings_inr": total_savings,
     }
+
+
+@app.get("/dashboard/hotspots")
+async def get_dashboard_hotspots():
+    """Discover and return active spatial incident hotspots across city zones."""
+    from tools.memory_tools import SpatialMemoryEngine
+
+    complaints = load_complaints().get("reports", [])
+    incidents = load_incidents().get("incidents", [])
+
+    hotspots = SpatialMemoryEngine.discover_citywide_hotspots(complaints, incidents)
+    return {
+        "hotspots": hotspots,
+        "total_hotspots": len(hotspots),
+        "critical_hotspots_count": len([h for h in hotspots if h["risk_tier"] == "CRITICAL"]),
+    }
+
+
+@app.get("/dashboard/recurring")
+async def get_recurring_defects():
+    """Analyze chronic recurrence and return vulnerable zones."""
+    from tools.memory_tools import SpatialMemoryEngine
+
+    complaints = load_complaints().get("reports", [])
+    incidents = load_incidents().get("incidents", [])
+
+    hotspots = SpatialMemoryEngine.discover_citywide_hotspots(complaints, incidents)
+    chronic = [h for h in hotspots if h["active_reports_count"] >= 3]
+
+    return {
+        "chronic_vulnerabilities": chronic,
+        "total_chronic_zones": len(chronic),
+    }
+
+
+@app.get("/memory/location-history")
+async def get_location_history(lat: float, lon: float, radius_m: float = 250.0):
+    """Retrieve radial historical memory profile and past complaints for coordinates."""
+    from tools.memory_tools import SpatialMemoryEngine
+
+    complaints = load_complaints().get("reports", [])
+    incidents = load_incidents().get("incidents", [])
+
+    return SpatialMemoryEngine.query_location_history(lat, lon, complaints, incidents, radius_m)
 
 
 # ══════════════════════════════════════════════════════════════════════════════

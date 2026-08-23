@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { api, API_BASE } from '../lib/api';
-import type { DashboardStats, IncidentContext, CivicReport } from '../lib/api';
+import type { DashboardStats, IncidentContext, CivicReport, HotspotItem } from '../lib/api';
 import StatCards from '../components/StatCards';
 import AgentPipeline, { buildPipelineStages } from '../components/AgentPipeline';
 import ImpactGauge from '../components/ImpactGauge';
 import RootCauseCard from '../components/RootCauseCard';
 import EconomicSavingsCard from '../components/EconomicSavingsCard';
+import HotspotsCard from '../components/HotspotsCard';
 import ResponsePlan from '../components/ResponsePlan';
 import ResolutionPanel from '../components/ResolutionPanel';
 import DemoControls from '../components/DemoControls';
@@ -27,6 +28,7 @@ export default function Dashboard() {
 
   const [incidents, setIncidents] = useState<IncidentContext[]>([]);
   const [reports, setReports] = useState<CivicReport[]>([]);
+  const [hotspots, setHotspots] = useState<HotspotItem[]>([]);
   const [selectedIncident, setSelectedIncident] = useState<IncidentContext | null>(null);
   const [runningAnalysis, setRunningAnalysis] = useState(false);
   const [pipelineStages, setPipelineStages] = useState<any[]>(buildPipelineStages());
@@ -43,6 +45,9 @@ export default function Dashboard() {
 
       const repsRes = await api.getReports();
       setReports(repsRes.reports || []);
+
+      const hotRes = await api.getHotspots();
+      setHotspots(hotRes.hotspots || []);
 
       // Refresh selected incident if one was selected
       if (selectedIncident) {
@@ -329,6 +334,12 @@ export default function Dashboard() {
               )}
             </div>
           </div>
+
+          {/* City Hotspots & Chronic Vulnerability Memory Card */}
+          <HotspotsCard
+            hotspots={hotspots}
+            selectedMemory={selectedIncident?.memory_profile}
+          />
         </div>
 
         {/* Right Side: Agent pipeline animation & analysis results workspace */}

@@ -209,6 +209,16 @@ class AgentLogEntry(BaseModel):
     recommended_action: str = ""
 
 
+class MemoryProfile(BaseModel):
+    """Civic memory, spatial recurrence, and historical intervention logs."""
+    total_historical_reports: int = 0
+    chronic_recurrence_score: float = 0.0
+    primary_vulnerability: str = "General Infrastructure"
+    civic_memory_insight: str = "First recorded incident at this location."
+    historical_incidents: List[dict] = Field(default_factory=list)
+    past_interventions: List[dict] = Field(default_factory=list)
+
+
 # ─── Unified Shared State ───────────────────────────────────────────────────────
 
 class IncidentContext(BaseModel):
@@ -224,6 +234,7 @@ class IncidentContext(BaseModel):
     root_cause: RootCause = Field(default_factory=RootCause)
     impact_score: ImpactScore = Field(default_factory=ImpactScore)
     economic_impact: EconomicImpact = Field(default_factory=EconomicImpact)
+    memory_profile: MemoryProfile = Field(default_factory=MemoryProfile)
     response_plan: ResponsePlan = Field(default_factory=ResponsePlan)
     resolution: Resolution = Field(default_factory=Resolution)
     sla: SLA = Field(default_factory=SLA)
