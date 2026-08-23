@@ -10,7 +10,7 @@ import EconomicSavingsCard from '../components/EconomicSavingsCard';
 import HotspotsCard from '../components/HotspotsCard';
 import ResponsePlan from '../components/ResponsePlan';
 import ResolutionPanel from '../components/ResolutionPanel';
-import DemoControls from '../components/DemoControls';
+
 import { AlertCircle, Play, Layers, Clock, MapPin } from 'lucide-react';
 
 export default function Dashboard() {
@@ -222,17 +222,7 @@ export default function Dashboard() {
           </span>
         </div>
         
-        <div style={{ width: 340 }}>
-          <DemoControls
-            currentIncidentId={selectedIncident?.incident_id}
-            onReset={async () => {
-              setSelectedIncident(null);
-              setPipelineStages(buildPipelineStages());
-              await loadData();
-            }}
-            onTimeAdvanced={loadData}
-          />
-        </div>
+
       </div>
 
       {/* Stats Counter Row */}

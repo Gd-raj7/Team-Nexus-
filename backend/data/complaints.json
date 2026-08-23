@@ -13,10 +13,10 @@
       },
       "description": "There is a major water leak from the underground pipe near Tech junction. Water has been flowing continuously for 2 days now. The road is getting soaked and there is water everywhere. Please send someone urgently.",
       "image_filename": "leak_01.jpg",
-      "status": "SUBMITTED",
+      "status": "LINKED_TO_INCIDENT",
       "ward": "Zone 7 - Metro Tech Corridor",
       "scenario_id": 1,
-      "linked_incident_id": null
+      "linked_incident_id": "INC-NX-2026-006"
     },
     {
       "report_id": "NX-2026-1002",
@@ -31,10 +31,10 @@
       },
       "description": "The road surface near Tech junction has started cracking badly. I think the water leak from the pipe underneath is causing the road to break apart. Vehicles are having difficulty passing through. Very dangerous for two-wheelers.",
       "image_filename": "road_damage_01.jpg",
-      "status": "SUBMITTED",
+      "status": "LINKED_TO_INCIDENT",
       "ward": "Zone 7 - Metro Tech Corridor",
       "scenario_id": 1,
-      "linked_incident_id": null
+      "linked_incident_id": "INC-NX-2026-006"
     },
     {
       "report_id": "NX-2026-1003",
@@ -49,10 +49,10 @@
       },
       "description": "A large pothole has formed on the main road opposite Cyber Galleria. It is almost 2 feet deep and filled with muddy water. Yesterday a scooter rider fell into it and got injured. This needs immediate attention.",
       "image_filename": "pothole_01.jpg",
-      "status": "SUBMITTED",
+      "status": "LINKED_TO_INCIDENT",
       "ward": "Zone 7 - Metro Tech Corridor",
       "scenario_id": 1,
-      "linked_incident_id": null
+      "linked_incident_id": "INC-NX-2026-006"
     },
     {
       "report_id": "NX-2026-1004",
@@ -67,10 +67,10 @@
       },
       "description": "Severe waterlogging on Tech Corridor road after just light rain. The water is not draining at all. It looks like the road damage and potholes are trapping water. Buses and autos are stuck. Ankle-deep water for pedestrians.",
       "image_filename": "waterlogging_01.jpg",
-      "status": "SUBMITTED",
+      "status": "LINKED_TO_INCIDENT",
       "ward": "Zone 7 - Metro Tech Corridor",
       "scenario_id": 1,
-      "linked_incident_id": null
+      "linked_incident_id": "INC-NX-2026-006"
     },
     {
       "report_id": "NX-2026-1005",
@@ -85,10 +85,10 @@
       },
       "description": "The water pipe is still leaking near Tech junction! Nobody has come to fix it. I submitted a complaint 2 days ago. The water is now spreading to the metro station area. Please escalate this.",
       "image_filename": "leak_02.jpg",
-      "status": "SUBMITTED",
+      "status": "LINKED_TO_INCIDENT",
       "ward": "Zone 7 - Metro Tech Corridor",
       "scenario_id": 1,
-      "linked_incident_id": null
+      "linked_incident_id": "INC-NX-2026-006"
     },
     {
       "report_id": "NX-2026-1006",
@@ -103,10 +103,10 @@
       },
       "description": "The service road near Tech junction is completely damaged. There are cracks everywhere and the road surface is crumbling. This happened after the water leak started last week. Please repair the road before monsoon season makes it worse.",
       "image_filename": "road_damage_02.jpg",
-      "status": "SUBMITTED",
+      "status": "LINKED_TO_INCIDENT",
       "ward": "Zone 7 - Metro Tech Corridor",
       "scenario_id": 1,
-      "linked_incident_id": null
+      "linked_incident_id": "INC-NX-2026-006"
     },
     {
       "report_id": "NX-2026-1007",
@@ -121,10 +121,10 @@
       },
       "description": "The main drain in Central Market area is completely blocked. I can see plastic waste and construction debris clogging the drain mouth. Water is already starting to accumulate on the road even without rain.",
       "image_filename": "drain_01.jpg",
-      "status": "SUBMITTED",
+      "status": "LINKED_TO_INCIDENT",
       "ward": "Zone 6 - Central Transit Ring",
       "scenario_id": 2,
-      "linked_incident_id": null
+      "linked_incident_id": "INC-NX-2026-003"
     },
     {
       "report_id": "NX-2026-1008",
@@ -139,10 +139,10 @@
       },
       "description": "Heavy waterlogging behind Central Market. The blocked drain is causing all the water to stay on the road. Shopkeepers are unable to open their shops. Water is entering ground floor homes.",
       "image_filename": "waterlogging_02.jpg",
-      "status": "SUBMITTED",
+      "status": "LINKED_TO_INCIDENT",
       "ward": "Zone 6 - Central Transit Ring",
       "scenario_id": 2,
-      "linked_incident_id": null
+      "linked_incident_id": "INC-NX-2026-003"
     },
     {
       "report_id": "NX-2026-1009",
@@ -157,10 +157,10 @@
       },
       "description": "Garbage is piling up near the blocked drain. The collection truck has not come for 3 days. The waterlogging is mixing with the garbage creating a terrible smell. Health hazard for residents.",
       "image_filename": "garbage_01.jpg",
-      "status": "SUBMITTED",
+      "status": "LINKED_TO_INCIDENT",
       "ward": "Zone 6 - Central Transit Ring",
       "scenario_id": 2,
-      "linked_incident_id": null
+      "linked_incident_id": "INC-NX-2026-003"
     },
     {
       "report_id": "NX-2026-1010",
@@ -175,10 +175,10 @@
       },
       "description": "Another drain near the bus stop is also getting blocked now. The garbage from the waterlogged area is floating and entering this drain too. Situation is getting worse every day.",
       "image_filename": "drain_02.jpg",
-      "status": "SUBMITTED",
+      "status": "LINKED_TO_INCIDENT",
       "ward": "Zone 6 - Central Transit Ring",
       "scenario_id": 2,
-      "linked_incident_id": null
+      "linked_incident_id": "INC-NX-2026-003"
     },
     {
       "report_id": "NX-2026-1011",
@@ -193,10 +193,10 @@
       },
       "description": "Stagnant water on Transit Ring main road for the 3rd day. It is turning green and mosquitoes are breeding. Children in the area are falling sick. Dengue risk is very high. Please take action immediately.",
       "image_filename": "waterlogging_03.jpg",
-      "status": "SUBMITTED",
+      "status": "LINKED_TO_INCIDENT",
       "ward": "Zone 6 - Central Transit Ring",
       "scenario_id": 2,
-      "linked_incident_id": null
+      "linked_incident_id": "INC-NX-2026-003"
     },
     {
       "report_id": "NX-2026-1012",
@@ -211,10 +211,10 @@
       },
       "description": "URGENT: There are exposed electrical wires hanging from a broken pole right next to Metro Academy gate. Children walk past this every morning. One wire is almost touching the ground. This is extremely dangerous, especially during rain. Someone could die.",
       "image_filename": "exposed_wire_01.jpg",
-      "status": "SUBMITTED",
+      "status": "LINKED_TO_INCIDENT",
       "ward": "Zone 3 - Coastal Bay & Education Hub",
       "scenario_id": 3,
-      "linked_incident_id": null
+      "linked_incident_id": "INC-NX-2026-004"
     },
     {
       "report_id": "NX-2026-1013",
@@ -229,10 +229,10 @@
       },
       "description": "Broken streetlight on Academy Lane has exposed wires. The insulation has completely worn off. This is right on the path children use to go to school. With monsoon approaching, live wires and water is a deadly combination. Needs emergency response.",
       "image_filename": "exposed_wire_02.jpg",
-      "status": "SUBMITTED",
+      "status": "LINKED_TO_INCIDENT",
       "ward": "Zone 3 - Coastal Bay & Education Hub",
       "scenario_id": 3,
-      "linked_incident_id": null
+      "linked_incident_id": "INC-NX-2026-004"
     },
     {
       "report_id": "NX-2026-1014",
@@ -247,7 +247,7 @@
       },
       "description": "Large pothole on West Bay Hill Avenue near the signal. Getting bigger every day with the rains. Multiple vehicles have been damaged. Two-wheelers especially at risk. Please fill and repair this urgently.",
       "image_filename": "pothole_02.jpg",
-      "status": "SUBMITTED",
+      "status": "UNDER_REVIEW",
       "ward": "Zone 5 - West Bay Commercial Belt",
       "scenario_id": 4,
       "linked_incident_id": null
@@ -265,7 +265,7 @@
       },
       "description": "The pothole on West Bay Hill Avenue I reported 5 days ago has not been fixed. It is now even deeper. Today a delivery boy on a bike fell and fractured his hand. How many injuries will it take before action is taken?",
       "image_filename": "pothole_03.jpg",
-      "status": "SUBMITTED",
+      "status": "UNDER_REVIEW",
       "ward": "Zone 5 - West Bay Commercial Belt",
       "scenario_id": 4,
       "linked_incident_id": null
@@ -283,10 +283,10 @@
       },
       "description": "The pothole on West Bay Hill Avenue was supposedly repaired last week but the patch has already come off! The pothole is back and even bigger now. Poor quality repair work. Need proper permanent fix this time.",
       "image_filename": "pothole_04.jpg",
-      "status": "SUBMITTED",
+      "status": "LINKED_TO_INCIDENT",
       "ward": "Zone 5 - West Bay Commercial Belt",
       "scenario_id": 4,
-      "linked_incident_id": null
+      "linked_incident_id": "INC-NX-2026-005"
     },
     {
       "report_id": "NX-2026-1017",
@@ -301,10 +301,10 @@
       },
       "description": "Road around the pothole area on West Bay Hill Avenue is completely damaged now. The failed repair made things worse. Large chunks of road surface have broken off. The whole stretch of 20 meters needs resurfacing.",
       "image_filename": "pothole_05.jpg",
-      "status": "SUBMITTED",
+      "status": "LINKED_TO_INCIDENT",
       "ward": "Zone 5 - West Bay Commercial Belt",
       "scenario_id": 4,
-      "linked_incident_id": null
+      "linked_incident_id": "INC-NX-2026-005"
     },
     {
       "report_id": "NX-2026-1018",
@@ -319,10 +319,10 @@
       "description": "Streetlight not working on SBS Road near Regal Cinema. The entire stretch is dark at night. Unsafe for women and elderly pedestrians.",
       "image_filename": "streetlight_01.jpg",
       "ward": "Zone 1 - Downtown Financial Core",
-      "status": "SUBMITTED",
+      "status": "LINKED_TO_INCIDENT",
       "phone": "+91-98200-10018",
       "scenario_id": null,
-      "linked_incident_id": null
+      "linked_incident_id": "INC-NX-2026-007"
     },
     {
       "report_id": "NX-2026-1019",
@@ -337,10 +337,10 @@
       "description": "Garbage bins overflowing at Colaba Market. Stray dogs tearing through the bags. Waste scattered on the road. Needs daily collection, not alternate days.",
       "image_filename": "garbage_02.jpg",
       "ward": "Zone 1 - Downtown Financial Core",
-      "status": "SUBMITTED",
+      "status": "LINKED_TO_INCIDENT",
       "phone": "+91-98200-10019",
       "scenario_id": null,
-      "linked_incident_id": null
+      "linked_incident_id": "INC-NX-2026-007"
     },
     {
       "report_id": "NX-2026-1020",
@@ -355,10 +355,10 @@
       "description": "Sewage overflowing from manhole on DN Road. The smell is unbearable. Sewage water spreading on the road. Heritage area being polluted.",
       "image_filename": "sewage_01.jpg",
       "ward": "Zone 2 - Port & Logistics Hub",
-      "status": "SUBMITTED",
+      "status": "LINKED_TO_INCIDENT",
       "phone": "+91-98200-10020",
       "scenario_id": null,
-      "linked_incident_id": null
+      "linked_incident_id": "INC-NX-2026-008"
     },
     {
       "report_id": "NX-2026-1021",
@@ -571,10 +571,10 @@
       "description": "Road damaged on Navy Nagar road. Heavy trucks from nearby construction site breaking the road surface daily. Speed breakers also damaged.",
       "image_filename": "road_damage_04.jpg",
       "ward": "Zone 1 - Downtown Financial Core",
-      "status": "SUBMITTED",
+      "status": "LINKED_TO_INCIDENT",
       "phone": "+91-98200-10032",
       "scenario_id": null,
-      "linked_incident_id": null
+      "linked_incident_id": "INC-NX-2026-007"
     },
     {
       "report_id": "NX-2026-1033",
@@ -643,10 +643,10 @@
       "description": "Drainage problem at Horniman Circle. After every rain, water stays for hours. The heritage structures are getting damaged due to prolonged waterlogging.",
       "image_filename": "drainage_02.jpg",
       "ward": "Zone 2 - Port & Logistics Hub",
-      "status": "SUBMITTED",
+      "status": "LINKED_TO_INCIDENT",
       "phone": "+91-98200-10036",
       "scenario_id": null,
-      "linked_incident_id": null
+      "linked_incident_id": "INC-NX-2026-008"
     },
     {
       "report_id": "NX-2026-1037",
@@ -714,11 +714,11 @@
       },
       "description": "Water pipe burst near Tech Metro pillar 28. This looks like the same leak others reported but it is getting much worse now. Water is gushing out at high pressure.",
       "image_filename": "leak_05.jpg",
-      "status": "SUBMITTED",
+      "status": "LINKED_TO_INCIDENT",
       "ward": "Zone 7 - Metro Tech Corridor",
       "scenario_id": 1,
       "phone": "+91-98200-10040",
-      "linked_incident_id": null
+      "linked_incident_id": "INC-NX-2026-006"
     },
     {
       "report_id": "NX-2026-1041",
@@ -895,11 +895,29 @@
       "description": "Drain blocked with plastic waste on Concourse road. The drain cover is missing and the open drain is a hazard. Plastic debris visible clogging the flow.",
       "image_filename": "drain_04.jpg",
       "ward": "Zone 7 - Metro Tech Corridor",
-      "status": "SUBMITTED",
+      "status": "UNDER_REVIEW",
       "phone": "+91-98200-10050",
       "scenario_id": null,
       "linked_incident_id": null
+    },
+    {
+      "report_id": "NX-2026-1051",
+      "timestamp": "2026-08-23T15:58:38.068352+05:30",
+      "citizen_name": "Anonymous",
+      "phone": "",
+      "location": {
+        "latitude": 19.119,
+        "longitude": 72.847,
+        "address": "Unknown Location",
+        "ward": ""
+      },
+      "description": "Blank screen test",
+      "image_filename": "leak_01.jpg",
+      "status": "UNDER_REVIEW",
+      "linked_incident_id": null,
+      "ward": "",
+      "scenario_id": null
     }
   ],
-  "total": 50
+  "total": 51
 }

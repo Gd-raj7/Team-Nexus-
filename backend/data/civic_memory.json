@@ -2,14 +2,14 @@
   "memories": {
     "Zone 7 - Metro Tech Corridor": {
       "location": "Zone 7 - Metro Tech Corridor",
-      "total_incidents": 0,
+      "total_incidents": 2,
       "previous_interventions": 0,
       "resolved_incidents": 0,
       "recurring": false,
       "recurrence_rate": 0.0,
       "last_intervention": "None",
       "common_issue": "Water leakage",
-      "insight": "No significant prior history."
+      "insight": "Historical reports exist in this area."
     },
     "Zone 6 - Central Transit Ring": {
       "location": "Zone 6 - Central Transit Ring",
@@ -42,6 +42,28 @@
       "recurrence_rate": 0.0,
       "last_intervention": "None",
       "common_issue": "Pothole",
+      "insight": "No significant prior history."
+    },
+    "Zone 1 - Downtown Financial Core": {
+      "location": "Zone 1 - Downtown Financial Core",
+      "total_incidents": 0,
+      "previous_interventions": 0,
+      "resolved_incidents": 0,
+      "recurring": false,
+      "recurrence_rate": 0.0,
+      "last_intervention": "None",
+      "common_issue": "Drainage issue",
+      "insight": "No significant prior history."
+    },
+    "Zone 2 - Port & Logistics Hub": {
+      "location": "Zone 2 - Port & Logistics Hub",
+      "total_incidents": 0,
+      "previous_interventions": 0,
+      "resolved_incidents": 0,
+      "recurring": false,
+      "recurrence_rate": 0.0,
+      "last_intervention": "None",
+      "common_issue": "Water leakage",
       "insight": "No significant prior history."
     }
   }
