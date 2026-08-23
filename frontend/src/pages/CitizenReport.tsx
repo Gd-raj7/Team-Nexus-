@@ -1,18 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
-import { api, API_BASE } from '../lib/api';
-import { Landmark, FilePlus, ClipboardCheck, ArrowRight, UploadCloud, Compass, MapPin, AlertTriangle, CheckCircle2 } from 'lucide-react';
+import { api } from '../lib/api';
+import { FilePlus, ClipboardCheck, ArrowRight, UploadCloud, Compass, AlertTriangle, CheckCircle2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-type InputMode = 'UPLOAD' | 'DEMO';
 type LocationStatus = 'idle' | 'detecting' | 'success' | 'denied';
 
 export default function CitizenReport() {
   const navigate = useNavigate();
-  const [inputMode, setInputMode] = useState<InputMode>('UPLOAD');
-  
-  // Demo Mode States
-  const [images, setImages] = useState<string[]>([]);
-  const [selectedDemoImage, setSelectedDemoImage] = useState('');
+
+
   
   // Upload Mode States
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
@@ -35,66 +31,9 @@ export default function CitizenReport() {
   const [submitting, setSubmitting] = useState(false);
   const [submittedReport, setSubmittedReport] = useState<any>(null);
 
-  // Default coordinate presets corresponding to seed images for reliable demo clustering
-  const PRESET_COORDS: Record<string, { lat: number; lon: number; addr: string; ward: string; desc: string }> = {
-    'leak_01.jpg': {
-      lat: 19.1190,
-      lon: 72.8470,
-      addr: 'Tech Junction Hub, Zone 7 Sector A',
-      ward: 'Zone 7 - Metro Tech Corridor',
-      desc: 'Major underground pressurized main leak. Water gushing onto the road causing structural erosion.',
-    },
-    'road_damage_01.jpg': {
-      lat: 19.1192,
-      lon: 72.8472,
-      addr: 'Tech Corridor Main Expressway, Sector A',
-      ward: 'Zone 7 - Metro Tech Corridor',
-      desc: 'Cracked asphalt foundation near Tech Hub. Road surface crumbling under traffic load.',
-    },
-    'pothole_01.jpg': {
-      lat: 19.1188,
-      lon: 72.8468,
-      addr: 'Opposite Cyber Galleria, Sector A',
-      ward: 'Zone 7 - Metro Tech Corridor',
-      desc: 'Deep pavement cavity filled with standing water. Hazardous for vehicles and two-wheelers.',
-    },
-    'waterlogging_01.jpg': {
-      lat: 19.1191,
-      lon: 72.8469,
-      addr: 'Tech Junction Signal Crossway',
-      ward: 'Zone 7 - Metro Tech Corridor',
-      desc: 'Substantial street flooding section. Water accumulating rapidly post-burst.',
-    },
-    'exposed_wire_01.jpg': {
-      lat: 19.0760,
-      lon: 72.8780,
-      addr: 'Near Metro Academy Gate, Coastal District',
-      ward: 'Zone 3 - Coastal Bay & Education Hub',
-      desc: 'Exposed energized electrical lines hanging low near school crosswalk.',
-    },
-    'garbage_01.jpg': {
-      lat: 19.0719,
-      lon: 72.8558,
-      addr: 'North Transit Colony Sector 4',
-      ward: 'Zone 6 - Central Transit Ring',
-      desc: 'Municipal bins overflowing. Refuse scattered into arterial drainage channels.',
-    },
-    'drain_01.jpg': {
-      lat: 19.0720,
-      lon: 72.8560,
-      addr: 'Transit Ring Central Market Road',
-      ward: 'Zone 6 - Central Transit Ring',
-      desc: 'Storm drain mouth severely obstructed by debris and sediment.',
-    }
-  };
 
-  useEffect(() => {
-    api.getSeedImages().then(res => {
-      // Filter out resolution/success images for initial submission list
-      const initialSeedImages = (res.images || []).filter((img: string) => !img.startsWith('resolved'));
-      setImages(initialSeedImages);
-    }).catch(console.error);
-  }, []);
+
+
 
   // Synchronize Leaflet map with coordinate states
   useEffect(() => {
@@ -163,17 +102,6 @@ export default function CitizenReport() {
     };
   }, []);
 
-  // Demo selection handler
-  const handleSelectDemoImage = (img: string) => {
-    setSelectedDemoImage(img);
-    const preset = PRESET_COORDS[img];
-    if (preset) {
-      setDescription(preset.desc);
-      setLocationName(preset.addr);
-      setLatitude(String(preset.lat));
-      setLongitude(String(preset.lon));
-    }
-  };
 
   // Browser Geolocation
   const handleGetLocation = () => {
@@ -252,12 +180,8 @@ export default function CitizenReport() {
     e.preventDefault();
     
     // Validations
-    if (inputMode === 'UPLOAD' && !uploadedFile) {
+    if (!uploadedFile) {
       alert('Please upload a civic issue photo.');
-      return;
-    }
-    if (inputMode === 'DEMO' && !selectedDemoImage) {
-      alert('Please select a demo image.');
       return;
     }
     if (!latitude || !longitude) {
@@ -269,9 +193,6 @@ export default function CitizenReport() {
     try {
       // Automatically map ward based on coordinate presets, fallback to general ward
       let calculatedWard = 'Ward 1 - Municipal General';
-      if (inputMode === 'DEMO' && selectedDemoImage) {
-        calculatedWard = PRESET_COORDS[selectedDemoImage]?.ward || calculatedWard;
-      }
 
       const payload = {
         citizen_name: citizenName,
@@ -281,11 +202,10 @@ export default function CitizenReport() {
         address: locationName || 'Unknown Location',
         ward: calculatedWard,
         description,
-        image_filename: inputMode === 'DEMO' ? selectedDemoImage : undefined,
-        image_file: inputMode === 'UPLOAD' ? uploadedFile : null,
+        image_file: uploadedFile,
       };
 
-      const res = await api.submitReport(payload);
+      await api.submitReport(payload);
       // Immediately navigate to dashboard
       navigate('/');
     } catch (err: any) {
@@ -424,8 +344,6 @@ export default function CitizenReport() {
                 </div>
               )}
             </div>
-            </div>
-
           {/* Contact Details Card */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
             <div className="card" style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
@@ -454,7 +372,6 @@ export default function CitizenReport() {
             <div className="card" style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               <h3 style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-secondary)' }}>Report Location</h3>
 
-              {inputMode === 'UPLOAD' ? (
                 /* Auto-detect location for Upload Mode */
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                   {locationStatus === 'idle' && (
@@ -536,33 +453,6 @@ export default function CitizenReport() {
                     </div>
                   )}
                 </div>
-              ) : (
-                /* Static Display fields for Demo Mode */
-                selectedDemoImage ? (
-                  <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 10,
-                    padding: '12px 14px',
-                    borderRadius: 8,
-                    background: 'rgba(37, 99, 235, 0.06)',
-                    border: '1px solid rgba(37, 99, 235, 0.15)',
-                  }}>
-                    <MapPin size={18} color="var(--accent-blue)" />
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                      <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-primary)' }}>📍 Demo Location</span>
-                      <span style={{ fontSize: 11, color: 'var(--text-secondary)' }}>
-                        {PRESET_COORDS[selectedDemoImage]?.addr} — {PRESET_COORDS[selectedDemoImage]?.ward}
-                      </span>
-                    </div>
-                  </div>
-                ) : (
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, height: '100%', color: 'var(--text-tertiary)', fontSize: 12 }}>
-                    <Landmark size={18} />
-                    Choose a seed image above to set geo-coordinates
-                  </div>
-                )
-              )}
 
               {/* Leaflet Map Integration */}
               {latitude && longitude && (
@@ -598,7 +488,7 @@ export default function CitizenReport() {
           <button
             type="submit"
             className="btn btn-primary"
-            disabled={submitting || (inputMode === 'UPLOAD' && !uploadedFile) || (inputMode === 'DEMO' && !selectedDemoImage)}
+            disabled={submitting || !uploadedFile}
             style={{ padding: 12, justifyContent: 'center' }}
           >
             {submitting ? (
@@ -655,7 +545,7 @@ export default function CitizenReport() {
                 setSubmittedReport(null);
                 setUploadedFile(null);
                 setFilePreview('');
-                setSelectedDemoImage('');
+
                 setLatitude('');
                 setLongitude('');
                 setLocationName('');
