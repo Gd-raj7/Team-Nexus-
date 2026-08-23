@@ -79,6 +79,8 @@ export default function Dashboard() {
 
   useEffect(() => {
     loadData();
+    const interval = setInterval(loadData, 5000); // Auto-refresh feed
+    return () => clearInterval(interval);
   }, []);
 
   // Handle autoAnalyze from submission routing state

@@ -1,12 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { api } from '../lib/api';
-import { FilePlus, ClipboardCheck, ArrowRight, UploadCloud, Compass, AlertTriangle, CheckCircle2 } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { FilePlus, ClipboardCheck, UploadCloud, Compass, AlertTriangle, CheckCircle2 } from 'lucide-react';
 
 type LocationStatus = 'idle' | 'detecting' | 'success' | 'denied';
 
 export default function CitizenReport() {
-  const navigate = useNavigate();
 
 
   
@@ -205,9 +203,8 @@ export default function CitizenReport() {
         image_file: uploadedFile,
       };
 
-      await api.submitReport(payload);
-      // Immediately navigate to dashboard
-      navigate('/');
+      const res = await api.submitReport(payload);
+      setSubmittedReport(res);
     } catch (err: any) {
       console.error(err);
       alert(`Submission failed: ${err.message || err}`);
@@ -372,7 +369,6 @@ export default function CitizenReport() {
             <div className="card" style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               <h3 style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-secondary)' }}>Report Location</h3>
 
-                /* Auto-detect location for Upload Mode */
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                   {locationStatus === 'idle' && (
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, padding: '12px 0' }}>
@@ -540,12 +536,11 @@ export default function CitizenReport() {
             marginTop: 12,
           }}>
             <button
-              className="btn btn-secondary"
+              className="btn btn-primary"
               onClick={() => {
                 setSubmittedReport(null);
                 setUploadedFile(null);
                 setFilePreview('');
-
                 setLatitude('');
                 setLongitude('');
                 setLocationName('');
@@ -553,15 +548,6 @@ export default function CitizenReport() {
               }}
             >
               Submit Another Report
-            </button>
-            <button
-              className="btn btn-primary"
-              onClick={() => {
-                navigate('/', { state: { autoAnalyzeId: submittedReport.report_id } });
-              }}
-            >
-              Go to Dashboard and Analyze
-              <ArrowRight size={14} />
             </button>
           </div>
         </div>

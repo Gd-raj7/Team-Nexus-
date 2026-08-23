@@ -5,7 +5,10 @@ import CitizenReport from './pages/CitizenReport';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 import './index.css';
 
-function AppShell() {
+import { useState, useEffect } from 'react';
+import Login from './pages/Login';
+
+function AppShell({ role, setRole }: { role: string | null; setRole: (role: string | null) => void }) {
   const { theme, toggleTheme } = useTheme();
 
   return (
@@ -57,40 +60,44 @@ function AppShell() {
         </div>
 
         <div style={{ display: 'flex', gap: 6 }}>
-          <NavLink to="/" end style={({ isActive }) => ({
-            padding: '7px 14px',
-            borderRadius: 8,
-            fontSize: 13,
-            fontWeight: 600,
-            color: isActive ? 'var(--text-primary)' : 'var(--text-secondary)',
-            background: isActive ? 'var(--bg-tertiary)' : 'transparent',
-            border: isActive ? '1px solid var(--border-primary)' : '1px solid transparent',
-            textDecoration: 'none',
-            display: 'flex',
-            alignItems: 'center',
-            gap: 7,
-            transition: 'all 0.15s ease',
-          })}>
-            <Activity size={15} />
-            Command Center
-          </NavLink>
-          <NavLink to="/report" style={({ isActive }) => ({
-            padding: '7px 14px',
-            borderRadius: 8,
-            fontSize: 13,
-            fontWeight: 600,
-            color: isActive ? 'var(--text-primary)' : 'var(--text-secondary)',
-            background: isActive ? 'var(--bg-tertiary)' : 'transparent',
-            border: isActive ? '1px solid var(--border-primary)' : '1px solid transparent',
-            textDecoration: 'none',
-            display: 'flex',
-            alignItems: 'center',
-            gap: 7,
-            transition: 'all 0.15s ease',
-          })}>
-            <FileText size={15} />
-            Citizen Portal
-          </NavLink>
+          {role === 'ADMIN' && (
+            <NavLink to="/" end style={({ isActive }) => ({
+              padding: '7px 14px',
+              borderRadius: 8,
+              fontSize: 13,
+              fontWeight: 600,
+              color: isActive ? 'var(--text-primary)' : 'var(--text-secondary)',
+              background: isActive ? 'var(--bg-tertiary)' : 'transparent',
+              border: isActive ? '1px solid var(--border-primary)' : '1px solid transparent',
+              textDecoration: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 7,
+              transition: 'all 0.15s ease',
+            })}>
+              <Activity size={15} />
+              Command Center
+            </NavLink>
+          )}
+          {role === 'CITIZEN' && (
+            <NavLink to="/report" style={({ isActive }) => ({
+              padding: '7px 14px',
+              borderRadius: 8,
+              fontSize: 13,
+              fontWeight: 600,
+              color: isActive ? 'var(--text-primary)' : 'var(--text-secondary)',
+              background: isActive ? 'var(--bg-tertiary)' : 'transparent',
+              border: isActive ? '1px solid var(--border-primary)' : '1px solid transparent',
+              textDecoration: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 7,
+              transition: 'all 0.15s ease',
+            })}>
+              <FileText size={15} />
+              Citizen Portal
+            </NavLink>
+          )}
         </div>
 
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 14 }}>
@@ -109,6 +116,26 @@ function AppShell() {
             <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#10b981', display: 'inline-block' }} />
             Autonomous Multi-Agent Matrix Live
           </div>
+
+          <button
+            onClick={() => {
+              localStorage.removeItem('civic_nexus_role');
+              setRole(null);
+            }}
+            style={{
+              padding: '5px 12px',
+              borderRadius: 8,
+              background: 'transparent',
+              border: '1px solid var(--border-primary)',
+              cursor: 'pointer',
+              color: 'var(--text-secondary)',
+              fontSize: 11,
+              fontWeight: 600,
+              transition: 'all 0.15s ease'
+            }}
+          >
+            Logout
+          </button>
 
           {/* Light / Dark mode toggle */}
           <button
@@ -137,8 +164,14 @@ function AppShell() {
       {/* Routes */}
       <main style={{ flex: 1, padding: '24px 28px' }}>
         <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/report" element={<CitizenReport />} />
+          {role === 'ADMIN' && <Route path="/" element={<Dashboard />} />}
+          {role === 'CITIZEN' && <Route path="/report" element={<CitizenReport />} />}
+          <Route path="*" element={
+            <div style={{ textAlign: 'center', marginTop: 100 }}>
+              <h2>Welcome to CivicNexus</h2>
+              <p>Please select your portal from the navigation bar.</p>
+            </div>
+          } />
         </Routes>
       </main>
 
@@ -159,10 +192,21 @@ function AppShell() {
 }
 
 export default function App() {
+  const [role, setRole] = useState<string | null>(null);
+
+  useEffect(() => {
+    const savedRole = localStorage.getItem('civic_nexus_role');
+    if (savedRole) setRole(savedRole);
+  }, []);
+
   return (
     <ThemeProvider>
       <BrowserRouter>
-        <AppShell />
+        {!role ? (
+          <Login setRole={setRole} />
+        ) : (
+          <AppShell role={role} setRole={setRole} />
+        )}
       </BrowserRouter>
     </ThemeProvider>
   );
