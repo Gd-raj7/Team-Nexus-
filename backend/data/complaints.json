@@ -841,7 +841,7 @@
       "description": "Sewage overflow at Nehru Nagar Kurla. The old sewage line has burst. Raw sewage flowing on the street. Children play in this area. Major health risk.",
       "image_filename": "sewage_04.jpg",
       "ward": "Ward 6 - Kurla",
-      "status": "SUBMITTED",
+      "status": "UNDER_REVIEW",
       "phone": "+91-98200-10047",
       "scenario_id": null,
       "linked_incident_id": null
@@ -859,7 +859,7 @@
       "description": "Exposed wires near Girgaon Chowpatty. Junction box open and wires visible. Beach area with many visitors including children. Risk of electrocution especially during rain.",
       "image_filename": "exposed_wire_04.jpg",
       "ward": "Ward 2 - Fort",
-      "status": "SUBMITTED",
+      "status": "UNDER_REVIEW",
       "phone": "+91-98200-10048",
       "scenario_id": null,
       "linked_incident_id": null
@@ -899,7 +899,25 @@
       "phone": "+91-98200-10050",
       "scenario_id": null,
       "linked_incident_id": null
+    },
+    {
+      "report_id": "CIV-2026-1051",
+      "timestamp": "2026-08-23T11:29:44.936380+05:30",
+      "citizen_name": "Anonymous",
+      "phone": "+91-98200-11111",
+      "location": {
+        "latitude": 11.272475,
+        "longitude": 78.159494,
+        "address": "Current Location",
+        "ward": "Ward 1 - Municipal General"
+      },
+      "description": "There are air",
+      "image_filename": "report_0e1acf3e.jpg",
+      "status": "UNDER_REVIEW",
+      "linked_incident_id": null,
+      "ward": "Ward 1 - Municipal General",
+      "scenario_id": null
     }
   ],
-  "total": 50
+  "total": 51
 }

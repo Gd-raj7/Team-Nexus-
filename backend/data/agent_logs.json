@@ -353,7 +353,163 @@
       "confidence": 0.7999999999999999,
       "recommended_action": "File as independent complaint",
       "timestamp": "2026-08-23T11:03:16.828380+05:30"
+    },
+    {
+      "agent": "PERCEPTION_AGENT",
+      "decision": "Classified as ROAD_DAMAGE, MEDIUM severity",
+      "evidence_used": [
+        "Image analysis: report_0e1acf3e.jpg",
+        "Citizen report: CIV-2026-1051",
+        "Visual: road surface defect matching citizen description text",
+        "Visual: visual abnormality requiring active location audit",
+        "Visual: unidentified structural decay reported"
+      ],
+      "confidence": 0.5,
+      "recommended_action": "Proceed to clustering for related reports in the area",
+      "timestamp": "2026-08-23T11:30:19.430915+05:30"
+    },
+    {
+      "agent": "CLUSTERING_AGENT",
+      "decision": "Found 0 related reports in cluster",
+      "evidence_used": [
+        "Search radius: 180.0m",
+        "Time window: 7 days",
+        "Center: (11.2725, 78.1595)",
+        "Cluster radius: 0m"
+      ],
+      "confidence": 0.5,
+      "recommended_action": "File as independent complaint",
+      "timestamp": "2026-08-23T11:30:19.433916+05:30"
+    },
+    {
+      "agent": "INCIDENT_DETECTION_AGENT",
+      "decision": "INDEPENDENT_COMPLAINTS",
+      "evidence_used": [
+        "Cluster size: 1 reports",
+        "Unique issue types: 1 (ROAD_DAMAGE)",
+        "Same-type reports: 1"
+      ],
+      "confidence": 0.5,
+      "recommended_action": "File as independent complaint",
+      "timestamp": "2026-08-23T11:30:19.455457+05:30"
+    },
+    {
+      "agent": "PERCEPTION_AGENT",
+      "decision": "Classified as ROAD_DAMAGE, MEDIUM severity",
+      "evidence_used": [
+        "Image analysis: report_0e1acf3e.jpg",
+        "Citizen report: CIV-2026-1051",
+        "Visual: road surface defect matching citizen description text",
+        "Visual: visual abnormality requiring active location audit",
+        "Visual: unidentified structural decay reported"
+      ],
+      "confidence": 0.5,
+      "recommended_action": "Proceed to clustering for related reports in the area",
+      "timestamp": "2026-08-23T11:30:19.508989+05:30"
+    },
+    {
+      "agent": "CLUSTERING_AGENT",
+      "decision": "Found 0 related reports in cluster",
+      "evidence_used": [
+        "Search radius: 180.0m",
+        "Time window: 7 days",
+        "Center: (11.2725, 78.1595)",
+        "Cluster radius: 0m"
+      ],
+      "confidence": 0.5,
+      "recommended_action": "File as independent complaint",
+      "timestamp": "2026-08-23T11:30:19.531718+05:30"
+    },
+    {
+      "agent": "INCIDENT_DETECTION_AGENT",
+      "decision": "INDEPENDENT_COMPLAINTS",
+      "evidence_used": [
+        "Cluster size: 1 reports",
+        "Unique issue types: 1 (ROAD_DAMAGE)",
+        "Same-type reports: 1"
+      ],
+      "confidence": 0.5,
+      "recommended_action": "File as independent complaint",
+      "timestamp": "2026-08-23T11:30:19.549713+05:30"
+    },
+    {
+      "agent": "PERCEPTION_AGENT",
+      "decision": "Classified as SEWAGE_OVERFLOW, CRITICAL severity",
+      "evidence_used": [
+        "Image analysis: sewage_04.jpg",
+        "Citizen report: CIV-2026-1047",
+        "Visual: Observed defect matching category: sewage overflow",
+        "Visual: Observed severity level assessed as critical",
+        "Visual: Visual validation matches known demographic seeds"
+      ],
+      "confidence": 0.91,
+      "recommended_action": "Proceed to clustering for related reports in the area",
+      "timestamp": "2026-08-23T11:31:26.632488+05:30"
+    },
+    {
+      "agent": "CLUSTERING_AGENT",
+      "decision": "Found 0 related reports in cluster",
+      "evidence_used": [
+        "Search radius: 180.0m",
+        "Time window: 7 days",
+        "Center: (19.0950, 72.8450)",
+        "Cluster radius: 0m"
+      ],
+      "confidence": 0.5,
+      "recommended_action": "File as independent complaint",
+      "timestamp": "2026-08-23T11:31:26.639492+05:30"
+    },
+    {
+      "agent": "INCIDENT_DETECTION_AGENT",
+      "decision": "INDEPENDENT_COMPLAINTS",
+      "evidence_used": [
+        "Cluster size: 1 reports",
+        "Unique issue types: 1 (SEWAGE_OVERFLOW)",
+        "Same-type reports: 1"
+      ],
+      "confidence": 0.5,
+      "recommended_action": "File as independent complaint",
+      "timestamp": "2026-08-23T11:31:26.663458+05:30"
+    },
+    {
+      "agent": "PERCEPTION_AGENT",
+      "decision": "Classified as EXPOSED_WIRES, HIGH severity",
+      "evidence_used": [
+        "Image analysis: exposed_wire_04.jpg",
+        "Citizen report: CIV-2026-1048",
+        "Visual: Observed defect matching category: exposed wires",
+        "Visual: Observed severity level assessed as high",
+        "Visual: Visual validation matches known demographic seeds"
+      ],
+      "confidence": 0.88,
+      "recommended_action": "Proceed to clustering for related reports in the area",
+      "timestamp": "2026-08-23T11:31:41.336582+05:30"
+    },
+    {
+      "agent": "CLUSTERING_AGENT",
+      "decision": "Found 0 related reports in cluster",
+      "evidence_used": [
+        "Search radius: 180.0m",
+        "Time window: 7 days",
+        "Center: (19.0350, 72.8400)",
+        "Cluster radius: 0m"
+      ],
+      "confidence": 0.5,
+      "recommended_action": "File as independent complaint",
+      "timestamp": "2026-08-23T11:31:41.342604+05:30"
+    },
+    {
+      "agent": "INCIDENT_DETECTION_AGENT",
+      "decision": "INDEPENDENT_COMPLAINTS",
+      "evidence_used": [
+        "Cluster size: 1 reports",
+        "Unique issue types: 1 (EXPOSED_WIRES)",
+        "Same-type reports: 1"
+      ],
+      "confidence": 0.5,
+      "recommended_action": "File as independent complaint",
+      "timestamp": "2026-08-23T11:31:41.372317+05:30"
     }
   ],
-  "total": 27
+  "total": 39
 }

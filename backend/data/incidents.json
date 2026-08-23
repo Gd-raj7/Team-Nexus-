@@ -222,10 +222,10 @@
     },
     {
       "incident_id": "INC-2026-002",
-      "status": "UNDER_REVIEW",
+      "status": "ESCALATED",
       "classification": "HIGH_CONFIDENCE_CONNECTED_INCIDENT",
       "created_at": "2026-08-23T10:55:15.188017+05:30",
-      "updated_at": "2026-08-23T10:55:15.189017+05:30",
+      "updated_at": "2026-08-23T11:34:54.076167+05:30",
       "connected_reports": [
         "CIV-2026-1008",
         "CIV-2026-1010",
@@ -404,9 +404,9 @@
       "resolution": {},
       "sla": {
         "deadline": "2026-08-23T22:55:15.259018+05:30",
-        "reminders_sent": 0,
-        "escalated": false,
-        "escalation_reason": "",
+        "reminders_sent": 1,
+        "escalated": true,
+        "escalation_reason": "SLA breached by 60.7 hours. Priority CRITICAL incident INC-2026-002 has not been resolved within the 12-hour deadline. Escalating to senior management for immediate attention.",
         "original_deadline": "2026-08-23T22:55:15.259018+05:30"
       },
       "agent_log": []
