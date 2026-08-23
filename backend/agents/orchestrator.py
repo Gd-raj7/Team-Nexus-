@@ -162,16 +162,8 @@ async def run_full_pipeline(report: Dict[str, Any]) -> Dict[str, Any]:
     }
     pipeline_result["agent_logs"].append(detection_result["agent_log"])
 
-    # Only create a full incident if connected reports detected
-    if "CONNECTED" not in detection_result["classification"]:
-        # Update report status
-        _update_report_status(report_id, "UNDER_REVIEW")
-        pipeline_result["stages"]["summary"] = {
-            "status": "complete",
-            "classification": detection_result["classification"],
-            "message": "Report classified as independent or duplicate. No incident created.",
-        }
-        return pipeline_result
+    # Removed early exit to force full pipeline analysis for ALL reports
+    # (even single isolated reports will now run through root cause, impact, and economic analysis)
 
     # ── Create Incident ──────────────────────────────────────────────────
     incident_id = _next_incident_id()
