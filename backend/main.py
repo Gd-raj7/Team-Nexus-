@@ -416,6 +416,13 @@ async def get_incident_memory(incident_id: str):
     raise HTTPException(status_code=404, detail=f"Incident {incident_id} not found")
 
 
+@app.get("/locations/{location_id}/memory")
+async def get_location_memory_endpoint(location_id: str):
+    """Get civic spatial memory for a location/ward."""
+    from services.civic_memory import get_civic_memory
+    return get_civic_memory(location_id)
+
+
 @app.get("/incidents/{incident_id}/response-plan")
 async def get_response_plan(incident_id: str):
     """Get response plan for an incident."""
@@ -617,35 +624,16 @@ async def get_dashboard_stats():
 
 @app.get("/dashboard/hotspots")
 async def get_dashboard_hotspots():
-    """Discover and return active spatial incident hotspots across city zones."""
-    from tools.memory_tools import SpatialMemoryEngine
-
-    complaints = load_complaints().get("reports", [])
-    incidents = load_incidents().get("incidents", [])
-
-    hotspots = SpatialMemoryEngine.discover_citywide_hotspots(complaints, incidents)
-    return {
-        "hotspots": hotspots,
-        "total_hotspots": len(hotspots),
-        "critical_hotspots_count": len([h for h in hotspots if h["risk_tier"] == "CRITICAL"]),
-    }
+    """Discover top active spatial incident hotspots grouped by location."""
+    from services.hotspot_service import get_hotspots
+    return {"hotspots": get_hotspots()}
 
 
-@app.get("/dashboard/recurring")
-async def get_recurring_defects():
-    """Analyze chronic recurrence and return vulnerable zones."""
-    from tools.memory_tools import SpatialMemoryEngine
-
-    complaints = load_complaints().get("reports", [])
-    incidents = load_incidents().get("incidents", [])
-
-    hotspots = SpatialMemoryEngine.discover_citywide_hotspots(complaints, incidents)
-    chronic = [h for h in hotspots if h["active_reports_count"] >= 3]
-
-    return {
-        "chronic_vulnerabilities": chronic,
-        "total_chronic_zones": len(chronic),
-    }
+@app.get("/dashboard/priority-incidents")
+async def get_priority_incidents():
+    """Return top incidents sorted by impact score."""
+    from services.priority_service import get_priority_incidents
+    return {"incidents": get_priority_incidents()}
 
 
 @app.get("/memory/location-history")

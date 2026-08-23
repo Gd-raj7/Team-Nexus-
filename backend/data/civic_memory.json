@@ -1,0 +1,48 @@
+{
+  "memories": {
+    "Zone 7 - Metro Tech Corridor": {
+      "location": "Zone 7 - Metro Tech Corridor",
+      "total_incidents": 0,
+      "previous_interventions": 0,
+      "resolved_incidents": 0,
+      "recurring": false,
+      "recurrence_rate": 0.0,
+      "last_intervention": "None",
+      "common_issue": "Water leakage",
+      "insight": "No significant prior history."
+    },
+    "Zone 6 - Central Transit Ring": {
+      "location": "Zone 6 - Central Transit Ring",
+      "total_incidents": 0,
+      "previous_interventions": 0,
+      "resolved_incidents": 0,
+      "recurring": false,
+      "recurrence_rate": 0.0,
+      "last_intervention": "None",
+      "common_issue": "Water leakage",
+      "insight": "No significant prior history."
+    },
+    "Zone 3 - Coastal Bay & Education Hub": {
+      "location": "Zone 3 - Coastal Bay & Education Hub",
+      "total_incidents": 0,
+      "previous_interventions": 0,
+      "resolved_incidents": 0,
+      "recurring": false,
+      "recurrence_rate": 0.0,
+      "last_intervention": "None",
+      "common_issue": "Water leakage",
+      "insight": "No significant prior history."
+    },
+    "Zone 5 - West Bay Commercial Belt": {
+      "location": "Zone 5 - West Bay Commercial Belt",
+      "total_incidents": 0,
+      "previous_interventions": 0,
+      "resolved_incidents": 0,
+      "recurring": false,
+      "recurrence_rate": 0.0,
+      "last_intervention": "None",
+      "common_issue": "Pothole",
+      "insight": "No significant prior history."
+    }
+  }
+}

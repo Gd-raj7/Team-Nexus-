@@ -17,6 +17,7 @@ export default defineConfig({
       '/incidents': 'http://127.0.0.1:8000',
       '/analyze': 'http://127.0.0.1:8000',
       '/dashboard': 'http://127.0.0.1:8000',
+      '/memory': 'http://127.0.0.1:8000',
       '/agent-logs': 'http://127.0.0.1:8000',
       '/dev': 'http://127.0.0.1:8000',
       '/seed-images': 'http://127.0.0.1:8000',

@@ -184,6 +184,7 @@ export function buildPipelineStages(
   const stageConfig = [
     { id: 'perception', name: 'Perception', agent: 'perception_agent' },
     { id: 'clustering', name: 'Clustering', agent: 'clustering_agent' },
+    { id: 'memory', name: 'Civic Memory', agent: 'memory_agent' },
     { id: 'incident_detection', name: 'Detection', agent: 'incident_agent' },
     { id: 'root_cause', name: 'Root Cause', agent: 'root_cause_agent' },
     { id: 'impact', name: 'Impact', agent: 'impact_agent' },
@@ -225,6 +226,9 @@ export function buildPipelineStages(
       case 'incident_detection':
         resultStr = (result.classification as string || '').replace(/_/g, ' ');
         confidence = result.confidence as number;
+        break;
+      case 'memory':
+        resultStr = result.recurring ? 'Recurring issue' : 'No history';
         break;
       case 'root_cause': {
         const chain = result.chain as string[] || [];

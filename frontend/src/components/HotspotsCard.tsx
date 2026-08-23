@@ -49,11 +49,11 @@ export default function HotspotsCard({ hotspots, selectedMemory }: Props) {
           <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
             <History size={13} color="#0ea5e9" />
             <span style={{ fontSize: 11, fontWeight: 700, color: '#38bdf8' }}>
-              Spatial Memory Index ({selectedMemory.chronic_recurrence_score}% Recurrence Risk)
+              Spatial Memory Index ({Math.round(((selectedMemory as any).recurrence_rate || 0) * 100)}% Recurrence Risk)
             </span>
           </div>
           <p style={{ fontSize: 11, color: 'var(--text-secondary)', margin: 0, lineHeight: 1.4 }}>
-            {selectedMemory.civic_memory_insight}
+            {(selectedMemory as any).insight || selectedMemory.civic_memory_insight}
           </p>
         </div>
       )}
@@ -66,8 +66,8 @@ export default function HotspotsCard({ hotspots, selectedMemory }: Props) {
           </div>
         ) : (
           hotspots.slice(0, 5).map((spot, idx) => {
-            const isCrit = spot.risk_tier === 'CRITICAL';
-            const isHigh = spot.risk_tier === 'HIGH';
+            const isCrit = spot.severity === 'CRITICAL';
+            const isHigh = spot.severity === 'HIGH';
             return (
               <div
                 key={idx}
@@ -86,23 +86,23 @@ export default function HotspotsCard({ hotspots, selectedMemory }: Props) {
                   <MapPin size={14} color={isCrit ? '#ef4444' : isHigh ? '#f59e0b' : '#3b82f6'} style={{ flexShrink: 0 }} />
                   <div style={{ display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
                     <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-primary)', textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
-                      {spot.zone}
+                      {spot.location}
                     </span>
                     <span style={{ fontSize: 9, color: 'var(--text-tertiary)', textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
-                      {spot.sample_address}
+                      {spot.recurring ? 'Recurring Issue' : 'Single Issue'}
                     </span>
                   </div>
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexShrink: 0 }}>
                   <span className="font-mono" style={{ fontSize: 11, fontWeight: 700, color: isCrit ? '#ef4444' : 'var(--text-primary)' }}>
-                    {spot.active_reports_count} rpts
+                    {spot.incident_count} incidents
                   </span>
                   <span
                     className={`badge ${isCrit ? 'badge-critical' : isHigh ? 'badge-high' : 'badge-medium'}`}
                     style={{ fontSize: 8, padding: '1px 5px' }}
                   >
-                    {spot.risk_tier}
+                    {spot.severity}
                   </span>
                 </div>
               </div>

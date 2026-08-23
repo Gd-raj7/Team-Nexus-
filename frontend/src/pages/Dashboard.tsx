@@ -39,7 +39,7 @@ export default function Dashboard() {
       const statsRes = await api.getStats();
       setStats(statsRes);
 
-      const incsRes = await api.getIncidents();
+      const incsRes = await api.getPriorityIncidents();
       const loadedIncs: IncidentContext[] = incsRes.incidents || [];
       setIncidents(loadedIncs);
 
@@ -58,6 +58,7 @@ export default function Dashboard() {
           const refreshedStages = buildPipelineStages({
             perception: { status: 'complete', result: refreshed.perception_results[0] || {} },
             clustering: { status: 'complete', result: { cluster_size: refreshed.cluster.report_count } },
+            memory: { status: 'complete', result: refreshed.memory_profile || {} },
             incident_detection: { status: 'complete', result: { classification: refreshed.classification } },
             root_cause: { status: 'complete', result: refreshed.root_cause },
             impact: { status: 'complete', result: refreshed.impact_score },
@@ -106,6 +107,7 @@ export default function Dashboard() {
       setPipelineStages(buildPipelineStages({
         perception: res.stages.perception,
         clustering: res.stages.clustering,
+        memory: res.stages.memory,
         incident_detection: res.stages.incident_detection
       } as any, true));
 
@@ -113,6 +115,7 @@ export default function Dashboard() {
       setPipelineStages(buildPipelineStages({
         perception: res.stages.perception,
         clustering: res.stages.clustering,
+        memory: res.stages.memory,
         incident_detection: res.stages.incident_detection,
         root_cause: res.stages.root_cause
       } as any, true));
@@ -121,6 +124,7 @@ export default function Dashboard() {
       setPipelineStages(buildPipelineStages({
         perception: res.stages.perception,
         clustering: res.stages.clustering,
+        memory: res.stages.memory,
         incident_detection: res.stages.incident_detection,
         root_cause: res.stages.root_cause,
         impact: res.stages.impact
@@ -130,6 +134,7 @@ export default function Dashboard() {
       setPipelineStages(buildPipelineStages({
         perception: res.stages.perception,
         clustering: res.stages.clustering,
+        memory: res.stages.memory,
         incident_detection: res.stages.incident_detection,
         root_cause: res.stages.root_cause,
         impact: res.stages.impact,
@@ -147,7 +152,7 @@ export default function Dashboard() {
           setSelectedIncident(found);
         } else {
           // Fallback load
-          const refreshedIncs = await api.getIncidents();
+          const refreshedIncs = await api.getPriorityIncidents();
           const matches = (refreshedIncs.incidents || []).find((i: any) => i.incident_id === res.incident_id);
           if (matches) setSelectedIncident(matches);
         }
@@ -166,19 +171,27 @@ export default function Dashboard() {
     await loadData();
   };
 
-  const handleSelectIncident = (inc: IncidentContext) => {
-    setSelectedIncident(inc);
-    // Populate pipeline display stages from completed context
-    const stages = buildPipelineStages({
-      perception: { status: 'complete', result: inc.perception_results[0] || {} },
-      clustering: { status: 'complete', result: { cluster_size: inc.cluster.report_count } },
-      incident_detection: { status: 'complete', result: { classification: inc.classification } },
-      root_cause: { status: 'complete', result: inc.root_cause },
-      impact: { status: 'complete', result: inc.impact_score },
-      response: { status: 'complete', result: inc.response_plan },
-      filing: { status: 'complete', result: { status: 'complete' } },
-    } as any);
-    setPipelineStages(stages);
+  const handleSelectIncident = async (inc: any) => {
+    try {
+      // Always fetch the full fresh incident context
+      const fullInc = await api.getIncident(inc.incident_id);
+      setSelectedIncident(fullInc);
+      
+      // Populate pipeline display stages from completed context
+      const stages = buildPipelineStages({
+        perception: { status: 'complete', result: fullInc.perception_results?.[0] || {} },
+        clustering: { status: 'complete', result: { cluster_size: fullInc.cluster?.report_count } },
+        memory: { status: 'complete', result: fullInc.memory_profile || {} },
+        incident_detection: { status: 'complete', result: { classification: fullInc.classification } },
+        root_cause: { status: 'complete', result: fullInc.root_cause },
+        impact: { status: 'complete', result: fullInc.impact_score },
+        response: { status: 'complete', result: fullInc.response_plan },
+        filing: { status: 'complete', result: { status: 'complete' } },
+      } as any);
+      setPipelineStages(stages);
+    } catch (err) {
+      console.error("Failed to fetch full incident details", err);
+    }
   };
 
   // Get status color badges for incidents list
@@ -234,7 +247,7 @@ export default function Dashboard() {
           <div className="card" style={{ padding: 14 }}>
             <h3 style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-primary)', marginBottom: 12, display: 'flex', alignItems: 'center', gap: 6 }}>
               <AlertCircle size={15} color="var(--accent-blue)" />
-              Incident Intelligence Feed
+              Priority Incidents
             </h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, maxHeight: 300, overflowY: 'auto' }}>
               {incidents.length === 0 ? (
@@ -262,19 +275,19 @@ export default function Dashboard() {
                       <span className="font-mono" style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-primary)' }}>
                         {inc.incident_id}
                       </span>
-                      {getStatusBadge(inc.status)}
+                      {getStatusBadge(inc.status || (inc as any).sla_status || 'UNKNOWN')}
                     </div>
                     <div style={{ fontSize: 11, color: 'var(--text-secondary)', textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
-                      {inc.root_cause?.hypothesis || 'Causal relationship analysis pending...'}
+                      {inc.root_cause?.hypothesis || (inc as any).category || 'Causal relationship analysis pending...'}
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10, color: 'var(--text-tertiary)' }}>
-                      <span>{inc.connected_reports.length} reports</span>
+                      <span>{(inc.connected_reports || []).length} reports</span>
                       <span className="badge" style={{
-                        background: inc.impact_score?.priority === 'CRITICAL' ? 'rgba(239, 68, 68, 0.08)' : 'rgba(59, 130, 246, 0.08)',
-                        color: inc.impact_score?.priority === 'CRITICAL' ? 'var(--status-critical)' : 'var(--accent-blue)',
+                        background: ((inc.impact_score as any)?.priority || (inc as any).priority) === 'CRITICAL' ? 'rgba(239, 68, 68, 0.08)' : 'rgba(59, 130, 246, 0.08)',
+                        color: ((inc.impact_score as any)?.priority || (inc as any).priority) === 'CRITICAL' ? 'var(--status-critical)' : 'var(--accent-blue)',
                         padding: '0 4px',
                       }}>
-                        Impact: {Math.round(inc.impact_score?.score || 0)}
+                        Impact: {Math.round((inc.impact_score as any)?.score || (inc as any).impact_score || 0)}
                       </span>
                     </div>
                   </div>

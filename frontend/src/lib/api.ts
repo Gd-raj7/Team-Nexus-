@@ -93,13 +93,10 @@ export interface MemoryProfile {
 }
 
 export interface HotspotItem {
-  zone: string;
-  center_lat: number;
-  center_lon: number;
-  active_reports_count: number;
-  risk_tier: 'CRITICAL' | 'HIGH' | 'MODERATE' | 'LOW';
-  active_incidents_count: number;
-  sample_address: string;
+  location: string;
+  incident_count: number;
+  severity: string;
+  recurring: boolean;
 }
 
 export interface IncidentContext {
@@ -263,8 +260,9 @@ export const api = {
 
   // Dashboard & Analytics
   getStats: (): Promise<DashboardStats> => fetchJson('/dashboard/stats'),
-  getHotspots: (): Promise<{ hotspots: HotspotItem[]; total_hotspots: number; critical_hotspots_count: number }> =>
+  getHotspots: (): Promise<{ hotspots: HotspotItem[] }> =>
     fetchJson('/dashboard/hotspots'),
+  getPriorityIncidents: () => fetchJson('/dashboard/priority-incidents'),
   getRecurring: () => fetchJson('/dashboard/recurring'),
   getLocationHistory: (lat: number, lon: number, radius_m: number = 250) =>
     fetchJson(`/memory/location-history?lat=${lat}&lon=${lon}&radius_m=${radius_m}`),

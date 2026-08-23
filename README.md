@@ -19,6 +19,7 @@ CivicNexus operates via a coordinated pipeline of eleven specialized autonomous 
 | **Geo-Temporal Clustering Agent** | Finds geographically and temporally related reports. | Pure Python Haversine distance (<180m) and temporal window (<7 days) math. |
 | **Incident Detection Agent** | Analyzes the cluster to determine classification. | Rules: `INDEPENDENT` / `DUPLICATE` / `POSSIBLE_CONNECTED` / `HIGH_CONFIDENCE_CONNECTED` + LLM narrative reasoning. |
 | **Root-Cause Agent** | Traces causal connections across multiple civic issues. | Directed dependency graph traversal (`civic_dependencies.json`) + LLM cascade hypothesis. |
+| **Civic Memory Agent** | Evaluates historical spatial risk and recurring problems. | Looks up past interventions in a 250m radius to flag chronic infrastructural vulnerabilities. |
 | **Civic Impact Agent** | Scores real-world public threat severity (0-100). | Weighted formula (Severity 30%, Proximity 20%, Impacted 15%, Duration 10%, Repeats 10%, Risks 15%) + LLM explanation. |
 | **Economic Optimization Agent** | Calculates municipal tax savings and prevented road re-digging cycles. | Preventative root fix ROI calculation vs compounding 4-week neglected damage. |
 | **Response Orchestration Agent** | Designates multi-department resolution work orders. | Topological sort matching department roles and execution dependencies (`departments.json`). |
@@ -73,11 +74,12 @@ Follow this script step-by-step for a seamless live demonstration:
 
 1. **Submit Initial Report**: Go to the **Citizen Portal** (`/report`). Select the seed image **`leak_01.jpg`** (Tech Junction Hub, Zone 7 Sector A). Click **Submit Complaint Report**.
 2. **Launch Agent Analysis**: Click **Go to Dashboard and Analyze**.
-3. **Analyze Pipeline**: On the Dashboard, find `NX-2026-1001` in the *Citizen Reports Feed*. Click **Run Agentic AI**. The live *Agent Pipeline* animates through perception, clustering (finding 6 related complaints), detection, root cause, impact, economic optimization, response, and municipal dispatch.
-4. **Inspect Root Cause, Economic Savings & Priority**:
-   - The **Economic Optimization Card** displays estimated municipal tax savings (e.g. ₹8,40,000 saved) and prevented road re-digging cycles.
-   - The Root Cause card displays the cascade hypothesis with the required physical inspection disclaimer.
-   - The Civic Impact gauge displays **CRITICAL** (86/100) priority.
+3. **Analyze Pipeline**: On the Dashboard, find `NX-2026-1001` in the *Priority Incidents* Feed. Click **Run Agentic AI**. The live *Agent Pipeline* animates through perception, clustering, civic memory, root cause, impact, economic optimization, response, and dispatch.
+4. **Inspect Root Cause, Civic Memory & Economic Savings**:
+   - The **Hotspots & Civic Memory Card** flags the location's historical recurrence risk.
+   - The **Economic Optimization Card** displays estimated municipal tax savings and prevented road re-digging cycles.
+   - The **Root Cause Card** displays the cascade hypothesis powered by spatial memory evidence.
+   - The **Civic Impact Gauge** displays **CRITICAL** (88/100) priority.
 5. **Approve Multi-Department Plan**: Scroll down to the *Response Plan*. Inspect the sequenced steps (Water Board first, then Drainage, and Roads Department last). Click **Approve Multi-Department Plan** to transition status to `ACTION_IN_PROGRESS`.
 6. **Submit Mismatched Resolution (Beat 1)**: In the *Resolution Verification* card, select **`resolved_leak_wrong.jpg`** (garbage image) and click **Submit and Verify**. The Verification Agent returns **`LOCATION_MISMATCH`** with a low confidence score, refusing to close the ticket.
 7. **Submit Correct Resolution (Beat 2)**: Select **`resolved_leak_correct.jpg`** (dry patched road at Tech Junction) and click **Submit and Verify**. The Verification Agent confirms **`RESOLUTION_VERIFIED`** and transitions status to **RESOLVED**, reducing impact level to **LOW**.

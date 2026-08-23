@@ -214,11 +214,26 @@ async def run_full_pipeline(report: Dict[str, Any]) -> Dict[str, Any]:
         "agent_log": [],
     }
 
+    # ── Stage 4.5: CIVIC MEMORY ⭐ ──────────────────────────────────────────
+    try:
+        from services.civic_memory import get_civic_memory
+        location_id = report.get("ward") or report.get("location", {}).get("ward", "Unassigned")
+        civic_memory_data = get_civic_memory(location_id)
+    except Exception:
+        civic_memory_data = None
+        
+    incident["memory_profile"] = civic_memory_data
+    pipeline_result["stages"]["memory"] = {
+        "status": "complete",
+        "result": civic_memory_data,
+    }
+
     # ── Stage 5: ROOT CAUSE ──────────────────────────────────────────────
     root_cause_result = await investigate_root_cause(
         issue_types=detection_result["issue_types"],
         perception_results=all_perception_results,
         cluster_reports=cluster_reports,
+        civic_memory_data=civic_memory_data,
     )
     _append_agent_log(root_cause_result["agent_log"])
     incident["root_cause"] = {
@@ -235,6 +250,8 @@ async def run_full_pipeline(report: Dict[str, Any]) -> Dict[str, Any]:
             "confidence": root_cause_result["confidence"],
             "hypothesis": root_cause_result["hypothesis"],
             "disclaimer": root_cause_result["disclaimer"],
+            "evidence": root_cause_result["evidence"],
+            "memory": civic_memory_data,
         },
     }
     pipeline_result["agent_logs"].append(root_cause_result["agent_log"])
@@ -277,20 +294,6 @@ async def run_full_pipeline(report: Dict[str, Any]) -> Dict[str, Any]:
         "result": economic_result["economic_impact"],
     }
     pipeline_result["agent_logs"].append(economic_result["agent_log"])
-
-    # ── Stage 6.6: CIVIC SPATIAL MEMORY & RECURRENCE ─────────────────────
-    existing_incidents = _load_json("incidents.json").get("incidents", [])
-    complaints_pool = _load_json("complaints.json").get("reports", [])
-    memory_result = await evaluate_memory(
-        incident_context=incident,
-        complaints_pool=complaints_pool,
-        all_incidents=existing_incidents,
-    )
-    incident["memory_profile"] = memory_result
-    pipeline_result["stages"]["memory"] = {
-        "status": "complete",
-        "result": memory_result,
-    }
 
     # ── Stage 7: RESPONSE PLAN ───────────────────────────────────────────
     response_result = await create_response_plan(
@@ -362,6 +365,8 @@ async def run_full_pipeline(report: Dict[str, Any]) -> Dict[str, Any]:
         "response_steps": len(response_result["steps"]),
         "message": f"Incident {incident_id} created with {len(connected_report_ids)} connected reports.",
     }
+    
+    pipeline_result["incident_id"] = incident_id
 
     return pipeline_result
 
