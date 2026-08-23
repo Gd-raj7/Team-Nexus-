@@ -60,10 +60,10 @@ export default function Dashboard() {
               clustering: { status: 'complete', result: { cluster_size: fullInc.cluster?.report_count } },
               memory: { status: 'complete', result: fullInc.memory_profile || {} },
               incident_detection: { status: 'complete', result: { classification: fullInc.classification } },
-              root_cause: { status: 'complete', result: fullInc.root_cause },
-              impact: { status: 'complete', result: fullInc.impact_score },
+              root_cause: { status: 'complete', result: fullInc.root_cause || {} },
+              impact: { status: 'complete', result: fullInc.impact_score || {} },
               economic: { status: 'complete', result: fullInc.economic_impact || {} },
-              response: { status: 'complete', result: fullInc.response_plan },
+              response: { status: 'complete', result: fullInc.response_plan || {} },
               filing: { status: 'complete', result: { status: 'complete' } },
             } as any);
             setPipelineStages(refreshedStages);
@@ -152,14 +152,13 @@ export default function Dashboard() {
       await loadData();
       
       if (res.incident_id) {
-        const found = incidents.find(i => i.incident_id === res.incident_id);
-        if (found) {
-          setSelectedIncident(found);
-        } else {
-          // Fallback load
-          const refreshedIncs = await api.getPriorityIncidents();
-          const matches = (refreshedIncs.incidents || []).find((i: any) => i.incident_id === res.incident_id);
-          if (matches) setSelectedIncident(matches);
+        try {
+          const fullInc = await api.getIncident(res.incident_id);
+          if (fullInc) {
+            setSelectedIncident(fullInc);
+          }
+        } catch (e) {
+          console.error("Failed to fetch full incident", e);
         }
       }
     } catch (err) {
@@ -189,8 +188,9 @@ export default function Dashboard() {
         memory: { status: 'complete', result: fullInc.memory_profile || {} },
         incident_detection: { status: 'complete', result: { classification: fullInc.classification } },
         root_cause: { status: 'complete', result: fullInc.root_cause },
-        impact: { status: 'complete', result: fullInc.impact_score },
-        response: { status: 'complete', result: fullInc.response_plan },
+        impact: { status: 'complete', result: fullInc.impact_score || {} },
+        economic: { status: 'complete', result: fullInc.economic_impact || {} },
+        response: { status: 'complete', result: fullInc.response_plan || {} },
         filing: { status: 'complete', result: { status: 'complete' } },
       } as any);
       setPipelineStages(stages);
@@ -446,17 +446,17 @@ export default function Dashboard() {
               {/* Impact Gauge & Root Cause Investigation */}
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 16 }}>
                 <ImpactGauge
-                  score={selectedIncident.impact_score.score}
-                  priority={selectedIncident.impact_score.priority}
-                  breakdown={selectedIncident.impact_score.breakdown}
-                  explanation={selectedIncident.impact_score.explanation}
+                  score={selectedIncident.impact_score?.score || 0}
+                  priority={selectedIncident.impact_score?.priority || 'UNKNOWN'}
+                  breakdown={selectedIncident.impact_score?.breakdown || {}}
+                  explanation={selectedIncident.impact_score?.explanation || ''}
                 />
                 <RootCauseCard
-                  hypothesis={selectedIncident.root_cause.hypothesis}
-                  confidence={selectedIncident.root_cause.confidence}
-                  evidence={selectedIncident.root_cause.evidence}
-                  chain={selectedIncident.root_cause.chain}
-                  disclaimer={selectedIncident.root_cause.disclaimer}
+                  hypothesis={selectedIncident.root_cause?.hypothesis || 'Pending Investigation'}
+                  confidence={selectedIncident.root_cause?.confidence || 0}
+                  evidence={selectedIncident.root_cause?.evidence || []}
+                  chain={selectedIncident.root_cause?.chain || []}
+                  disclaimer={selectedIncident.root_cause?.disclaimer || ''}
                 />
               </div>
 
@@ -464,9 +464,9 @@ export default function Dashboard() {
               <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 16 }}>
                 <ResponsePlan
                   incidentId={selectedIncident.incident_id}
-                  steps={selectedIncident.response_plan.steps}
-                  rationale={selectedIncident.response_plan.rationale}
-                  approved={selectedIncident.response_plan.approved}
+                  steps={selectedIncident.response_plan?.steps || []}
+                  rationale={selectedIncident.response_plan?.rationale || ''}
+                  approved={selectedIncident.response_plan?.approved || false}
                   onApprove={handleApprovePlan}
                 />
                 <ResolutionPanel

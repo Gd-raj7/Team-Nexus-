@@ -1,1 +1,143 @@
-{"incidents": []}
+{
+  "incidents": [
+    {
+      "incident_id": "INC-NX-2026-001",
+      "status": "UNDER_REVIEW",
+      "classification": "DUPLICATE_REPORTS",
+      "created_at": "2026-08-23T17:12:11.961548+05:30",
+      "updated_at": "2026-08-23T17:12:11.961548+05:30",
+      "connected_reports": [
+        "NX-2026-1053",
+        "NX-2026-1051",
+        "NX-2026-1052"
+      ],
+      "cluster": {
+        "radius_m": 0.0,
+        "time_window_days": 7,
+        "center_lat": 11.272864,
+        "center_lon": 78.160691,
+        "report_count": 3
+      },
+      "perception_results": [
+        {
+          "report_id": "NX-2026-1053",
+          "issue_type": "ROAD_DAMAGE",
+          "severity": "MEDIUM",
+          "confidence": 0.5,
+          "evidence_text": "Visual evidence detected: road surface defect matching citizen description text. visual abnormality requiring active location audit. unidentified structural decay reported.",
+          "image_filename": "report_dea106f8.webp",
+          "visual_evidence": [
+            "road surface defect matching citizen description text",
+            "visual abnormality requiring active location audit",
+            "unidentified structural decay reported"
+          ]
+        },
+        {
+          "report_id": "NX-2026-1051",
+          "issue_type": "ROAD_DAMAGE",
+          "severity": "MEDIUM",
+          "confidence": 0.5,
+          "evidence_text": "Visual evidence detected: road surface defect matching citizen description text. visual abnormality requiring active location audit. unidentified structural decay reported.",
+          "image_filename": "report_c75ddc3b.webp",
+          "visual_evidence": [
+            "road surface defect matching citizen description text",
+            "visual abnormality requiring active location audit",
+            "unidentified structural decay reported"
+          ]
+        },
+        {
+          "report_id": "NX-2026-1052",
+          "issue_type": "ROAD_DAMAGE",
+          "severity": "MEDIUM",
+          "confidence": 0.5,
+          "evidence_text": "Visual evidence detected: road surface defect matching citizen description text. visual abnormality requiring active location audit. unidentified structural decay reported.",
+          "image_filename": "report_9c9b994b.webp",
+          "visual_evidence": [
+            "road surface defect matching citizen description text",
+            "visual abnormality requiring active location audit",
+            "unidentified structural decay reported"
+          ]
+        }
+      ],
+      "root_cause": {
+        "hypothesis": "Root cause analysis identifies a cascading infrastructure failure: ROAD_DAMAGE. The evidence suggests that ROAD_DAMAGE triggered a chain of downstream effects through Single isolated symptom observed - no antecedent cascade.. This cascade pattern is consistent with 1 distinct issue types observed within a concentrated geographic area.",
+        "confidence": 0.5,
+        "evidence": [
+          "Single isolated symptom observed - no antecedent cascade."
+        ],
+        "chain": [
+          "ROAD_DAMAGE"
+        ],
+        "disclaimer": "AI-generated civic incident hypothesis. Physical inspection recommended."
+      },
+      "impact_score": {
+        "score": 44.0,
+        "priority": "MEDIUM",
+        "breakdown": {
+          "severity_score": 50.0,
+          "infrastructure_proximity": 30.0,
+          "people_affected": 45.0,
+          "duration": 20.0,
+          "repeat_reports": 60.0,
+          "secondary_risk": 55.0
+        },
+        "explanation": "Impact score of 44.0/100 classified as MEDIUM. Key factors: severity at 50.0/100, infrastructure proximity at 30.0/100, and secondary risk at 55.0/100. The cascading nature of 1 interconnected issue types over 0.0 days significantly elevates the overall impact."
+      },
+      "response_plan": {
+        "steps": [
+          {
+            "step_number": 1,
+            "department": "ROADS_DEPT",
+            "department_name": "Roads & Infrastructure Department",
+            "action": "Address ROAD_DAMAGE operational failures",
+            "reason": "Road repairs are wasted if underlying water/drainage issues persist",
+            "estimated_hours": 72,
+            "depends_on": [],
+            "resources": [
+              "Asphalt paving crews",
+              "Road repair machinery",
+              "Traffic management units",
+              "Barricades and signage"
+            ],
+            "issues": [
+              "ROAD_DAMAGE"
+            ]
+          }
+        ],
+        "rationale": "The response plan follows a dependency-ordered sequence to ensure root cause fixes precede downstream repairs. Road repairs are deliberately scheduled after water/drainage fixes because repairing road surfaces over an active water leak would waste resources and require re-work.",
+        "approved": false,
+        "approved_by": "",
+        "approved_at": ""
+      },
+      "resolution": {},
+      "sla": {
+        "deadline": "2026-08-25T17:12:12.117113+05:30",
+        "reminders_sent": 0,
+        "escalated": false,
+        "escalation_reason": "",
+        "original_deadline": "2026-08-25T17:12:12.117113+05:30"
+      },
+      "agent_log": [],
+      "memory_profile": {
+        "location": "Ward 1 - Municipal General",
+        "total_incidents": 0,
+        "previous_interventions": 0,
+        "resolved_incidents": 0,
+        "recurring": false,
+        "recurrence_rate": 0.0,
+        "last_intervention": "None",
+        "common_issue": "Drainage issue",
+        "insight": "No significant prior history."
+      },
+      "economic_impact": {
+        "estimated_damage_if_neglected_inr": 624000,
+        "root_cause_fix_cost_inr": 86250,
+        "estimated_savings_inr": 537750,
+        "prevented_road_redigging_cycles": 1,
+        "infrastructure_longevity_boost": "2.1x Extended Asset Life",
+        "cost_benefit_summary": "By executing a unified multi-department response instead of isolated ad-hoc repairs, the municipality saves an estimated ₹537,750 and prevents 1 wasteful road re-excavation cycles."
+      }
+    }
+  ],
+  "total": 1
+}

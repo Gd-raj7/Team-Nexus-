@@ -65,6 +65,17 @@
       "last_intervention": "None",
       "common_issue": "Water leakage",
       "insight": "No significant prior history."
+    },
+    "Ward 1 - Municipal General": {
+      "location": "Ward 1 - Municipal General",
+      "total_incidents": 0,
+      "previous_interventions": 0,
+      "resolved_incidents": 0,
+      "recurring": false,
+      "recurrence_rate": 0.0,
+      "last_intervention": "None",
+      "common_issue": "Drainage issue",
+      "insight": "No significant prior history."
     }
   }
 }

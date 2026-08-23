@@ -77,7 +77,109 @@
       "confidence": 0.7999999999999999,
       "recommended_action": "File as independent complaint",
       "timestamp": "2026-08-23T17:06:44.978280+05:30"
+    },
+    {
+      "agent": "PERCEPTION_AGENT",
+      "decision": "Classified as ROAD_DAMAGE, MEDIUM severity",
+      "evidence_used": [
+        "Image analysis: report_dea106f8.webp",
+        "Citizen report: NX-2026-1053",
+        "Visual: road surface defect matching citizen description text",
+        "Visual: visual abnormality requiring active location audit",
+        "Visual: unidentified structural decay reported"
+      ],
+      "confidence": 0.5,
+      "recommended_action": "Proceed to clustering for related reports in the area",
+      "timestamp": "2026-08-23T17:12:11.888311+05:30"
+    },
+    {
+      "agent": "CLUSTERING_AGENT",
+      "decision": "Found 2 related reports in cluster",
+      "evidence_used": [
+        "Search radius: 180.0m",
+        "Time window: 7 days",
+        "Center: (11.2729, 78.1607)",
+        "Cluster radius: 0.0m"
+      ],
+      "confidence": 0.7,
+      "recommended_action": "Proceed to incident detection",
+      "timestamp": "2026-08-23T17:12:11.912309+05:30"
+    },
+    {
+      "agent": "INCIDENT_DETECTION_AGENT",
+      "decision": "DUPLICATE_REPORTS",
+      "evidence_used": [
+        "Cluster size: 3 reports",
+        "Unique issue types: 1 (ROAD_DAMAGE)",
+        "Same-type reports: 3"
+      ],
+      "confidence": 0.85,
+      "recommended_action": "File as independent complaint",
+      "timestamp": "2026-08-23T17:12:11.936499+05:30"
+    },
+    {
+      "agent": "ROOT_CAUSE_AGENT",
+      "decision": "Causal chain: ROAD_DAMAGE",
+      "evidence_used": [
+        "Single isolated symptom observed - no antecedent cascade.",
+        "3 related reports analyzed",
+        "1 distinct issue types identified"
+      ],
+      "confidence": 0.5,
+      "recommended_action": "Proceed to impact assessment and response planning",
+      "timestamp": "2026-08-23T17:12:11.991617+05:30"
+    },
+    {
+      "agent": "IMPACT_AGENT",
+      "decision": "Impact Score: 44.0/100 - MEDIUM",
+      "evidence_used": [
+        "Severity: 50.0",
+        "Proximity: 30.0",
+        "People affected: 45.0",
+        "Duration: 20.0 (0.0 days)",
+        "Repeat reports: 60.0 (3 reports)",
+        "Secondary risk: 55.0"
+      ],
+      "confidence": 0.9,
+      "recommended_action": "Schedule response per MEDIUM priority SLA",
+      "timestamp": "2026-08-23T17:12:12.013271+05:30"
+    },
+    {
+      "agent": "ECONOMIC_OPTIMIZATION_AGENT",
+      "decision": "Projected Municipal Savings: ₹537,750",
+      "evidence_used": [
+        "Coordinated Root Repair: ₹86,250",
+        "Projected 4-Week Cascade Damage: ₹624,000",
+        "Prevented Repetitive Excavation: 1 cycle(s)"
+      ],
+      "confidence": 0.92,
+      "recommended_action": "Prioritize combined work order to optimize municipal capital allocation",
+      "timestamp": "2026-08-23T17:12:12.039311+05:30"
+    },
+    {
+      "agent": "RESPONSE_ORCHESTRATION_AGENT",
+      "decision": "1-step multi-department response plan created",
+      "evidence_used": [
+        "Root cause: ROAD_DAMAGE",
+        "Priority: MEDIUM",
+        "Departments involved: Roads & Infrastructure Department"
+      ],
+      "confidence": 0.85,
+      "recommended_action": "REQUIRES HUMAN APPROVAL before execution",
+      "timestamp": "2026-08-23T17:12:12.065334+05:30"
+    },
+    {
+      "agent": "MUNICIPAL_DISPATCH_AGENT",
+      "decision": "Municipal Dispatch Work Order generated: MUNI-NEXUS-INC-NX-2026-001",
+      "evidence_used": [
+        "Incident: INC-NX-2026-001",
+        "Reports: 3",
+        "Priority: MEDIUM"
+      ],
+      "confidence": 1.0,
+      "recommended_action": "Track resolution through SLA monitoring",
+      "timestamp": "2026-08-23T17:12:12.090340+05:30"
     }
   ],
-  "total": 6
+  "total": 14
 }
