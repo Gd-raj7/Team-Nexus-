@@ -1,5 +1,5 @@
-"""
-CivicIQ -- AI Service
+﻿"""
+CivicNexus AI -- AI Service
 Thin wrapper around Anthropic Claude for LLM narrative generation.
 Falls back to deterministic mock output if no API key is available.
 """
@@ -56,3 +56,4 @@ async def generate_narrative(
     except Exception as e:
         print(f"[AI_SERVICE] LLM call failed: {e}. Using fallback.")
         return fallback_text
+

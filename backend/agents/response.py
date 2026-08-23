@@ -1,5 +1,5 @@
-"""
-CivicIQ -- Response Orchestration Agent
+﻿"""
+CivicNexus AI -- Response Orchestration Agent
 Department knowledge-base lookup, dependency-ordered multi-department response plan.
 LLM explains the ordering rationale.
 """
@@ -94,3 +94,4 @@ async def create_response_plan(
         "approved": False,
         "agent_log": agent_log,
     }
+

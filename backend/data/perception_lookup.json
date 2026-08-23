@@ -216,10 +216,10 @@
     "evidence_text": "Exposed high-voltage wires hanging from damaged pole near school entrance. Insulation completely stripped. Wire at approximately 1.5m height — within reach of children. Immediate electrocution risk, amplified during rain."
   },
   "exposed_wire_02.jpg": {
-    "issue_type": "EXPOSED_WIRES",
+    "issue_type": "BROKEN_STREETLIGHT",
     "severity": "CRITICAL",
     "confidence": 0.92,
-    "evidence_text": "Broken streetlight with exposed internal wiring on school path. Junction box damaged and open. Multiple bare copper conductors visible. Combination with wet monsoon conditions creates lethal hazard."
+    "evidence_text": "Broken streetlight fixture with exposed internal wiring on school path. Housing damaged and live electrical conductors exposed. Combination with wet monsoon conditions creates lethal hazard."
   },
   "exposed_wire_03.jpg": {
     "issue_type": "EXPOSED_WIRES",

@@ -177,7 +177,6 @@ export default function AgentPipeline({ stages }: AgentPipelineProps) {
   );
 }
 
-// Helper to build stages from pipeline result
 export function buildPipelineStages(
   pipelineResult?: Record<string, { status: string; result: Record<string, unknown> }>,
   isRunning: boolean = false,
@@ -188,8 +187,9 @@ export function buildPipelineStages(
     { id: 'incident_detection', name: 'Detection', agent: 'incident_agent' },
     { id: 'root_cause', name: 'Root Cause', agent: 'root_cause_agent' },
     { id: 'impact', name: 'Impact', agent: 'impact_agent' },
+    { id: 'economic', name: 'Optimization', agent: 'economic_agent' },
     { id: 'response', name: 'Response', agent: 'response_agent' },
-    { id: 'filing', name: 'Filing', agent: 'filing_agent' },
+    { id: 'filing', name: 'Dispatch', agent: 'dispatch_agent' },
   ];
 
   if (!pipelineResult) {
@@ -220,7 +220,7 @@ export function buildPipelineStages(
         confidence = result.confidence as number;
         break;
       case 'clustering':
-        resultStr = `${result.cluster_size || 0} related reports`;
+        resultStr = `${result.cluster_size || 0} clustered reports`;
         break;
       case 'incident_detection':
         resultStr = (result.classification as string || '').replace(/_/g, ' ');
@@ -235,6 +235,11 @@ export function buildPipelineStages(
       case 'impact':
         resultStr = `${result.score || 0}/100 · ${result.priority || ''}`;
         break;
+      case 'economic': {
+        const savings = result.estimated_savings_inr as number;
+        resultStr = savings ? `₹${(savings / 1000).toFixed(0)}k Saved` : 'ROI Optimized';
+        break;
+      }
       case 'response': {
         const steps = result.steps as Array<Record<string, unknown>> || [];
         const approved = result.approved as boolean;
@@ -243,7 +248,7 @@ export function buildPipelineStages(
         break;
       }
       case 'filing':
-        resultStr = 'Complaint filed';
+        resultStr = 'Dispatch Ticket Issued';
         break;
     }
 

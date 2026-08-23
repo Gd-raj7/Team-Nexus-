@@ -1,5 +1,5 @@
-"""
-CivicIQ -- Root Cause Investigation Agent
+﻿"""
+CivicNexus AI -- Root Cause Investigation Agent
 Walks civic_dependencies.json to find causal chains, LLM narrates the reasoning.
 """
 
@@ -86,3 +86,4 @@ async def investigate_root_cause(
         "disclaimer": disclaimer,
         "agent_log": agent_log,
     }
+

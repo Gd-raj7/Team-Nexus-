@@ -6,6 +6,7 @@ import StatCards from '../components/StatCards';
 import AgentPipeline, { buildPipelineStages } from '../components/AgentPipeline';
 import ImpactGauge from '../components/ImpactGauge';
 import RootCauseCard from '../components/RootCauseCard';
+import EconomicSavingsCard from '../components/EconomicSavingsCard';
 import ResponsePlan from '../components/ResponsePlan';
 import ResolutionPanel from '../components/ResolutionPanel';
 import DemoControls from '../components/DemoControls';
@@ -21,6 +22,7 @@ export default function Dashboard() {
     resolved_incidents: 0,
     reopened_incidents: 0,
     escalated_incidents: 0,
+    total_estimated_savings_inr: 0,
   });
 
   const [incidents, setIncidents] = useState<IncidentContext[]>([]);
@@ -54,6 +56,7 @@ export default function Dashboard() {
             incident_detection: { status: 'complete', result: { classification: refreshed.classification } },
             root_cause: { status: 'complete', result: refreshed.root_cause },
             impact: { status: 'complete', result: refreshed.impact_score },
+            economic: { status: 'complete', result: refreshed.economic_impact || {} },
             response: { status: 'complete', result: refreshed.response_plan },
             filing: { status: 'complete', result: { status: 'complete' } },
           } as any);
@@ -190,11 +193,11 @@ export default function Dashboard() {
       {/* Header with Dev control triggers */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
         <div>
-          <h2 style={{ fontSize: 20, fontWeight: 700, color: 'var(--text-primary)' }}>
-            Authority Operations Dashboard
+          <h2 style={{ fontSize: 21, fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>
+            Municipal Operations Command Matrix
           </h2>
           <span style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
-            CivicIQ autonomous multi-agent pipeline monitoring interface.
+            CivicNexus autonomous multi-agent incident detection and root-cause intelligence engine.
           </span>
         </div>
         
@@ -415,6 +418,11 @@ export default function Dashboard() {
                   ))}
                 </div>
               </div>
+
+              {/* Municipal Economic Savings & Resource Optimization Card */}
+              {selectedIncident.economic_impact && (
+                <EconomicSavingsCard economicImpact={selectedIncident.economic_impact} />
+              )}
 
               {/* Impact Gauge & Root Cause Investigation */}
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 16 }}>

@@ -62,6 +62,15 @@ export interface AgentLogEntry {
   recommended_action: string;
 }
 
+export interface EconomicImpact {
+  estimated_damage_if_neglected_inr: number;
+  root_cause_fix_cost_inr: number;
+  estimated_savings_inr: number;
+  prevented_road_redigging_cycles: number;
+  infrastructure_longevity_boost: string;
+  cost_benefit_summary: string;
+}
+
 export interface IncidentContext {
   incident_id: string;
   status: string;
@@ -90,6 +99,7 @@ export interface IncidentContext {
     breakdown: ImpactBreakdown;
     explanation: string;
   };
+  economic_impact?: EconomicImpact;
   response_plan: {
     steps: ResponseStep[];
     rationale: string;
@@ -132,6 +142,7 @@ export interface DashboardStats {
   resolved_incidents: number;
   reopened_incidents: number;
   escalated_incidents: number;
+  total_estimated_savings_inr?: number;
 }
 
 // ── API Functions ─────────────────────────────────────────────────────────

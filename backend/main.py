@@ -1,8 +1,6 @@
 """
-CivicIQ -- FastAPI Backend
-Autonomous Civic Incident Intelligence System
-
-"Different complaints. One hidden signal."
+CivicNexus AI — High-Performance Autonomous Civic Incident Intelligence Matrix
+"Decoding Fragmented Citizen Signals into Unified Urban Intelligence."
 """
 
 import json
@@ -16,9 +14,14 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
+import sys
+
 # ── Paths ────────────────────────────────────────────────────────────────────
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+if BASE_DIR not in sys.path:
+    sys.path.insert(0, BASE_DIR)
+
 DATA_DIR = os.path.join(BASE_DIR, "data")
 SEED_IMAGES_DIR = os.path.join(BASE_DIR, "seed_images")
 UPLOADS_DIR = os.path.join(BASE_DIR, "uploads")
@@ -104,7 +107,7 @@ def next_report_id() -> str:
     data = load_complaints()
     reports = data.get("reports", [])
     if not reports:
-        return "CIV-2026-1051"
+        return "NX-2026-1051"
     max_num = 0
     for r in reports:
         try:
@@ -113,14 +116,14 @@ def next_report_id() -> str:
                 max_num = num
         except (ValueError, IndexError):
             pass
-    return f"CIV-2026-{max_num + 1}"
+    return f"NX-2026-{max_num + 1}"
 
 
 def next_incident_id() -> str:
     data = load_incidents()
     incidents = data.get("incidents", [])
     if not incidents:
-        return "INC-2026-001"
+        return "INC-NX-2026-001"
     max_num = 0
     for inc in incidents:
         try:
@@ -129,15 +132,15 @@ def next_incident_id() -> str:
                 max_num = num
         except (ValueError, IndexError):
             pass
-    return f"INC-2026-{max_num + 1:03d}"
+    return f"INC-NX-2026-{max_num + 1:03d}"
 
 
 # ── FastAPI app ──────────────────────────────────────────────────────────────
 
 app = FastAPI(
-    title="CivicIQ",
-    description="Autonomous Civic Incident Intelligence System",
-    version="1.0.0",
+    title="CivicNexus AI",
+    description="Autonomous Multi-Agent Civic Incident Intelligence Matrix",
+    version="2.0.0",
 )
 
 app.add_middleware(
@@ -393,6 +396,16 @@ async def get_incident_impact(incident_id: str):
     raise HTTPException(status_code=404, detail=f"Incident {incident_id} not found")
 
 
+@app.get("/incidents/{incident_id}/economic-impact")
+async def get_incident_economic_impact(incident_id: str):
+    """Get economic savings and municipal efficiency metrics for an incident."""
+    data = load_incidents()
+    for inc in data.get("incidents", []):
+        if inc["incident_id"] == incident_id:
+            return inc.get("economic_impact", {})
+    raise HTTPException(status_code=404, detail=f"Incident {incident_id} not found")
+
+
 @app.get("/incidents/{incident_id}/response-plan")
 async def get_response_plan(incident_id: str):
     """Get response plan for an incident."""
@@ -574,6 +587,12 @@ async def get_dashboard_stats():
     reopened = [i for i in incidents if i.get("status") == "REOPENED"]
     escalated = [i for i in incidents if i.get("status") == "ESCALATED"]
 
+    # Calculate cumulative municipal tax savings across all incidents
+    total_savings = sum(
+        i.get("economic_impact", {}).get("estimated_savings_inr", 0)
+        for i in incidents
+    )
+
     return {
         "total_reports": len(reports),
         "total_incidents": len(incidents),
@@ -582,6 +601,7 @@ async def get_dashboard_stats():
         "resolved_incidents": len(resolved),
         "reopened_incidents": len(reopened),
         "escalated_incidents": len(escalated),
+        "total_estimated_savings_inr": total_savings,
     }
 
 
@@ -594,7 +614,7 @@ async def reset_demo():
     """Reset all data to pre-demo state."""
     from scripts.seed_data import generate_seed_data
     generate_seed_data()
-    return {"message": "Demo data reset successfully.", "timestamp": now_ist()}
+    return {"message": "CivicNexus data reset successfully.", "timestamp": now_ist()}
 
 
 @app.get("/dev/scenarios")
@@ -626,10 +646,10 @@ async def get_perception_lookup():
 @app.get("/")
 async def root():
     return {
-        "name": "CivicIQ",
-        "tagline": "Different complaints. One hidden signal.",
-        "version": "1.0.0",
-        "status": "running",
+        "name": "CivicNexus AI",
+        "tagline": "Decoding Fragmented Citizen Signals into Unified Urban Intelligence.",
+        "version": "2.0.0",
+        "status": "operational",
     }
 
 

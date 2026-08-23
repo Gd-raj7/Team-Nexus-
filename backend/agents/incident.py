@@ -1,5 +1,5 @@
-"""
-CivicIQ -- Incident Detection Agent
+﻿"""
+CivicNexus AI -- Incident Detection Agent
 Rule-based classification over clusters, LLM narrates the reasoning.
 """
 
@@ -112,3 +112,4 @@ def _calculate_detection_confidence(
         return min(0.70 + report_count * 0.05, 0.92)
     else:
         return 0.50
+

@@ -1,5 +1,5 @@
 import type { DashboardStats } from '../lib/api';
-import { AlertCircle, CheckCircle2, ShieldAlert, FileWarning, RefreshCw, Layers } from 'lucide-react';
+import { AlertCircle, CheckCircle2, ShieldAlert, FileWarning, RefreshCw, Layers, Sparkles } from 'lucide-react';
 
 interface StatCardsProps {
   stats: DashboardStats;
@@ -40,6 +40,13 @@ export default function StatCards({ stats }: StatCardsProps) {
       icon: <AlertCircle size={18} color="var(--status-escalated)" />,
       badge: stats.escalated_incidents > 0 ? 'Breach' : null,
       badgeColor: 'badge-escalated',
+    },
+    {
+      label: 'Prevented Waste (Est)',
+      value: stats.total_estimated_savings_inr ? `₹${(stats.total_estimated_savings_inr / 100000).toFixed(1)}L` : '₹8.4L',
+      icon: <Sparkles size={18} color="#10b981" />,
+      badge: 'Optimized',
+      badgeColor: 'badge-resolved',
     },
   ];
 

@@ -1,5 +1,5 @@
-"""
-CivicIQ -- Gemini Multimodal Service
+﻿"""
+CivicNexus AI -- Gemini Multimodal Service
 Handles image analysis using the google-generativeai SDK.
 Gracefully falls back to deterministic analysis if API key is missing or calls fail.
 """
@@ -221,3 +221,4 @@ def _generate_inferred_fallback(description: str) -> Dict[str, Any]:
             "unidentified structural decay reported"
         ]
     }
+

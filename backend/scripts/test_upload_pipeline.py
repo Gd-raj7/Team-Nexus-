@@ -18,10 +18,10 @@ fields = {
     'description': 'A large deep pothole in the middle of the road causing traffic blockage.',
     'latitude': '19.1190',
     'longitude': '72.8470',
-    'location_name': 'Chakala Junction, Andheri East',
+    'location_name': 'Tech Junction Hub, Zone 7 Sector A',
     'citizen_name': 'Test Citizen',
     'phone': '+91-99999-88888',
-    'ward': 'Ward 7 - Andheri East'
+    'ward': 'Zone 7 - Metro Tech Corridor'
 }
 
 for name, value in fields.items():

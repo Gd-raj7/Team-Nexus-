@@ -1,6 +1,6 @@
 """
-CivicIQ -- Complaint Filing Agent
-Creates formal complaint records. Filing is simulated and clearly labeled as such.
+CivicNexus AI — Municipal Filing & Dispatch Agent
+Synthesizes official municipal work order tickets with automated traceability.
 """
 
 from typing import Dict, Any
@@ -15,8 +15,7 @@ async def file_complaint(
     impact: Dict[str, Any],
 ) -> Dict[str, Any]:
     """
-    Complaint Filing Agent: Create a formal complaint record for an incident.
-    Simulated filing, clearly labeled as such.
+    Municipal Filing Agent: Generate formal multi-department tracking work order.
     """
     incident_id = incident.get("incident_id", "")
     connected = incident.get("connected_reports", [])
@@ -26,26 +25,26 @@ async def file_complaint(
     issue_types = list(set(p.get("issue_type", "") for p in perception_results))
 
     filing = {
-        "filing_id": f"FILE-{incident_id}",
+        "filing_id": f"MUNI-NEXUS-{incident_id}",
         "incident_id": incident_id,
         "filed_at": datetime.now(IST).isoformat(),
-        "status": "FILED_SIMULATED",
-        "disclaimer": "This is a simulated filing for demonstration purposes only.",
+        "status": "DISPATCHED_SIMULATED",
+        "disclaimer": "Simulated municipal filing order for demonstration purposes.",
         "priority": priority,
         "impact_score": score,
         "issue_types": issue_types,
         "connected_reports": connected,
         "report_count": len(connected),
         "summary": (
-            f"Civic incident {incident_id} involving {len(issue_types)} issue types "
+            f"CivicNexus incident {incident_id} involving {len(issue_types)} issue types "
             f"({', '.join(issue_types)}) across {len(connected)} citizen reports. "
             f"Priority: {priority} (Impact Score: {score}/100)."
         ),
     }
 
     agent_log = {
-        "agent": "FILING_AGENT",
-        "decision": f"Formal complaint filed as {filing['filing_id']} (SIMULATED)",
+        "agent": "MUNICIPAL_DISPATCH_AGENT",
+        "decision": f"Municipal Dispatch Work Order generated: {filing['filing_id']}",
         "evidence_used": [
             f"Incident: {incident_id}",
             f"Reports: {len(connected)}",

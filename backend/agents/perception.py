@@ -1,5 +1,5 @@
-"""
-CivicIQ -- Perception Agent
+﻿"""
+CivicNexus AI -- Perception Agent
 Integrates Gemini multimodal analysis for uploaded photos,
 and deterministic lookup tables for pre-built scenario seed images.
 """
@@ -156,3 +156,4 @@ def _infer_from_description(description: str) -> tuple:
                 return (issue_type, severity, confidence)
 
     return ("POTHOLE", "MEDIUM", 0.50)  # Default fallback
+

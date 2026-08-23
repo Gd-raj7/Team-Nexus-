@@ -1,9 +1,9 @@
 """
-CivicIQ -- Orchestrator
-Central pipeline controller. Sole writer of IncidentContext to disk.
+CivicNexus AI — Autonomous Pipeline Orchestrator
+Central pipeline controller and sole atomic writer of IncidentContext to disk.
 
-Pipeline: OBSERVE -> UNDERSTAND -> CONNECT -> INVESTIGATE -> PRIORITIZE ->
-          PLAN -> ACT/RECOMMEND -> TRACK -> VERIFY -> REPLAN/ESCALATE
+Pipeline: PERCEPTION -> CLUSTERING -> DETECTION -> ROOT CAUSE -> IMPACT ->
+          ECONOMIC OPTIMIZATION -> RESPONSE PLANNING -> MUNICIPAL FILING
 """
 
 import json
@@ -16,6 +16,7 @@ from agents.clustering import find_cluster
 from agents.incident import detect_incident
 from agents.root_cause import investigate_root_cause
 from agents.impact import assess_impact
+from agents.economic import evaluate_economic_impact
 from agents.response import create_response_plan
 from agents.filing import file_complaint
 
@@ -30,6 +31,8 @@ def _now_ist() -> str:
 
 def _load_json(filename: str) -> dict:
     path = os.path.join(DATA_DIR, filename)
+    if not os.path.exists(path):
+        return {}
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
@@ -41,7 +44,7 @@ def _save_json(filename: str, data: dict):
 
 
 def _append_agent_log(entry: dict):
-    """Append an agent log entry to the centralized log."""
+    """Append an agent log entry to the centralized audit trail."""
     entry["timestamp"] = _now_ist()
     logs = _load_json("agent_logs.json")
     if "logs" not in logs:
@@ -55,7 +58,7 @@ def _next_incident_id() -> str:
     data = _load_json("incidents.json")
     incidents = data.get("incidents", [])
     if not incidents:
-        return "INC-2026-001"
+        return "INC-NX-2026-001"
     max_num = 0
     for inc in incidents:
         try:
@@ -64,7 +67,7 @@ def _next_incident_id() -> str:
                 max_num = num
         except (ValueError, IndexError):
             pass
-    return f"INC-2026-{max_num + 1:03d}"
+    return f"INC-NX-2026-{max_num + 1:03d}"
 
 
 async def run_full_pipeline(report: Dict[str, Any]) -> Dict[str, Any]:
@@ -258,6 +261,21 @@ async def run_full_pipeline(report: Dict[str, Any]) -> Dict[str, Any]:
         },
     }
     pipeline_result["agent_logs"].append(impact_result["agent_log"])
+
+    # ── Stage 6.5: ECONOMIC OPTIMIZATION (CivicNexus AI Feature) ────────
+    economic_result = await evaluate_economic_impact(
+        issue_types=detection_result["issue_types"],
+        impact_score=impact_result,
+        cluster_reports=cluster_reports,
+        root_cause=root_cause_result,
+    )
+    _append_agent_log(economic_result["agent_log"])
+    incident["economic_impact"] = economic_result["economic_impact"]
+    pipeline_result["stages"]["economic"] = {
+        "status": "complete",
+        "result": economic_result["economic_impact"],
+    }
+    pipeline_result["agent_logs"].append(economic_result["agent_log"])
 
     # ── Stage 7: RESPONSE PLAN ───────────────────────────────────────────
     response_result = await create_response_plan(

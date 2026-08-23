@@ -1,5 +1,5 @@
-"""
-CivicIQ -- Escalation Agent
+﻿"""
+CivicNexus AI -- Escalation Agent
 SLA/state-machine tracker with advance-demo-time hook.
 """
 
@@ -127,3 +127,4 @@ async def check_escalation(
         "escalation_reason": escalation_reason,
         "agent_log": agent_log,
     }
+

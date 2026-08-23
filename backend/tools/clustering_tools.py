@@ -1,92 +1,93 @@
 """
-CivicIQ -- Clustering Tools
-Time-window filtering and complaint clustering logic.
+CivicNexus AI — Spatio-Temporal Cluster Analysis Engine
+Performs multi-dimensional temporal windowing and geo-proximity correlation.
 """
 
 from datetime import datetime, timedelta
 from typing import List, Dict, Any
+from tools.geo_tools import GeoSpatialEngine
 
-from tools.geo_tools import haversine, get_nearby_complaints, calculate_cluster_center, calculate_cluster_radius
 
+class ClusterAnalysisEngine:
+    """Spatio-temporal clustering engine for municipal incident correlation."""
+
+    DEFAULT_RADIUS_METERS: float = 180.0
+    DEFAULT_TEMPORAL_WINDOW_DAYS: int = 7
+
+    @staticmethod
+    def parse_datetime(iso_string: str) -> datetime:
+        try:
+            return datetime.fromisoformat(iso_string)
+        except (ValueError, TypeError):
+            return datetime.now()
+
+    @classmethod
+    def filter_by_temporal_window(
+        cls,
+        anchor_timestamp: str,
+        window_days: int,
+        complaints_pool: List[Dict[str, Any]],
+    ) -> List[Dict[str, Any]]:
+        anchor_dt = cls.parse_datetime(anchor_timestamp)
+        lower_bound = anchor_dt - timedelta(days=window_days)
+
+        matched = []
+        for c in complaints_pool:
+            c_dt = cls.parse_datetime(c.get("timestamp", ""))
+            if lower_bound <= c_dt <= anchor_dt:
+                matched.append(c)
+        return matched
+
+    @classmethod
+    def build_spatio_temporal_cluster(
+        cls,
+        seed_report: Dict[str, Any],
+        full_catalog: List[Dict[str, Any]],
+        radius_threshold_m: float = DEFAULT_RADIUS_METERS,
+        temporal_window_days: int = DEFAULT_TEMPORAL_WINDOW_DAYS,
+    ) -> Dict[str, Any]:
+        seed_loc = seed_report.get("location", {})
+        s_lat = seed_loc.get("latitude", 0.0)
+        s_lon = seed_loc.get("longitude", 0.0)
+        s_id = seed_report.get("report_id", "")
+        s_ts = seed_report.get("timestamp", "")
+
+        anchor_dt = cls.parse_datetime(s_ts)
+        w_start = anchor_dt - timedelta(days=temporal_window_days)
+        w_end = anchor_dt + timedelta(days=temporal_window_days)
+
+        time_cohort = []
+        for item in full_catalog:
+            item_dt = cls.parse_datetime(item.get("timestamp", ""))
+            if w_start <= item_dt <= w_end and item.get("report_id") != s_id:
+                time_cohort.append(item)
+
+        proximate_cohort = GeoSpatialEngine.find_proximate_reports(
+            s_lat, s_lon, radius_threshold_m, time_cohort, exclude_id=s_id
+        )
+
+        unified_group = [seed_report] + proximate_cohort
+        c_lat, c_lon = GeoSpatialEngine.compute_spatial_centroid(unified_group)
+        spread_m = GeoSpatialEngine.compute_bounding_radius(unified_group, c_lat, c_lon)
+
+        return {
+            "reports": proximate_cohort,
+            "center_lat": c_lat,
+            "center_lon": c_lon,
+            "radius_m": spread_m,
+            "time_window_days": temporal_window_days,
+            "count": len(proximate_cohort),
+            "report_ids": [r.get("report_id") for r in proximate_cohort],
+        }
+
+
+# ── Functional Wrappers for Complete Backward Compatibility ────────────────────
 
 def parse_timestamp(ts: str) -> datetime:
-    """Parse an ISO timestamp string to datetime."""
-    try:
-        return datetime.fromisoformat(ts)
-    except (ValueError, TypeError):
-        return datetime.now()
+    return ClusterAnalysisEngine.parse_datetime(ts)
 
+def get_recent_complaints(reference_timestamp: str, window_days: int, complaints: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    return ClusterAnalysisEngine.filter_by_temporal_window(reference_timestamp, window_days, complaints)
 
-def get_recent_complaints(
-    reference_timestamp: str,
-    window_days: int,
-    complaints: List[Dict[str, Any]],
-) -> List[Dict[str, Any]]:
-    """
-    Filter complaints that fall within window_days before the reference timestamp.
-    """
-    ref_dt = parse_timestamp(reference_timestamp)
-    cutoff = ref_dt - timedelta(days=window_days)
-
-    recent = []
-    for c in complaints:
-        c_dt = parse_timestamp(c.get("timestamp", ""))
-        if cutoff <= c_dt <= ref_dt:
-            recent.append(c)
-
-    return recent
-
-
-def cluster_complaints(
-    target_report: Dict[str, Any],
-    all_complaints: List[Dict[str, Any]],
-    radius_m: float = 180.0,
-    window_days: int = 7,
-) -> Dict[str, Any]:
-    """
-    Cluster complaints that are near the target report in both space and time.
-
-    Returns a cluster dict with:
-    - reports: list of clustered complaint dicts
-    - center: (lat, lon) tuple
-    - radius_m: actual cluster radius
-    - time_window_days: window used
-    - count: number of reports in cluster
-    """
-    loc = target_report.get("location", {})
-    target_lat = loc.get("latitude", 0)
-    target_lon = loc.get("longitude", 0)
-    target_id = target_report.get("report_id", "")
-    target_ts = target_report.get("timestamp", "")
-
-    # Step 1: Filter by time window (reports within window_days of target)
-    ref_dt = parse_timestamp(target_ts)
-    time_start = ref_dt - timedelta(days=window_days)
-    time_end = ref_dt + timedelta(days=window_days)
-
-    time_filtered = []
-    for c in all_complaints:
-        c_dt = parse_timestamp(c.get("timestamp", ""))
-        if time_start <= c_dt <= time_end and c.get("report_id") != target_id:
-            time_filtered.append(c)
-
-    # Step 2: Filter by distance
-    nearby = get_nearby_complaints(
-        target_lat, target_lon, radius_m,
-        time_filtered, exclude_id=target_id,
-    )
-
-    # Step 3: Calculate cluster metrics
-    all_in_cluster = [target_report] + nearby
-    center_lat, center_lon = calculate_cluster_center(all_in_cluster)
-    actual_radius = calculate_cluster_radius(all_in_cluster, center_lat, center_lon)
-
-    return {
-        "reports": nearby,
-        "center_lat": center_lat,
-        "center_lon": center_lon,
-        "radius_m": actual_radius,
-        "time_window_days": window_days,
-        "count": len(nearby),
-        "report_ids": [r.get("report_id") for r in nearby],
-    }
+def cluster_complaints(target_report: Dict[str, Any], all_complaints: List[Dict[str, Any]], radius_m: float = 180.0, window_days: int = 7) -> Dict[str, Any]:
+    return ClusterAnalysisEngine.build_spatio_temporal_cluster(target_report, all_complaints, radius_m, window_days)

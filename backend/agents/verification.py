@@ -1,5 +1,5 @@
-"""
-CivicIQ -- Resolution Verification Agent
+﻿"""
+CivicNexus AI -- Resolution Verification Agent
 Verifies before/after photos, GPS, timestamps, new nearby complaints.
 Two-attempt demo beat: mismatch -> fail -> correct evidence -> verify.
 """
@@ -120,3 +120,4 @@ async def verify_resolution(incident: Dict[str, Any]) -> Dict[str, Any]:
         "new_complaints": tool_result.get("new_complaints", []),
         "agent_log": agent_log,
     }
+

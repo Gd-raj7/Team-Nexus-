@@ -1,1 +1,2 @@
-# CivicIQ Models
+﻿# CivicNexus AI Models
+

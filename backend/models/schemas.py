@@ -1,13 +1,11 @@
 """
-CivicIQ — Shared State Schema
-Every agent reads/writes a single shared IncidentContext object.
-This is what makes them a pipeline instead of disconnected scripts.
+CivicNexus AI — Unified Incident State Architecture
+Every autonomous agent reads/writes a single shared IncidentContext contract.
 """
 
 from pydantic import BaseModel, Field
 from typing import Optional, List
 from enum import Enum
-from datetime import datetime
 
 
 # ─── Enums ──────────────────────────────────────────────────────────────────────
@@ -82,10 +80,10 @@ class Location(BaseModel):
 
 
 class CivicReport(BaseModel):
-    """A single citizen complaint/report."""
+    """A single citizen complaint report in CivicNexus."""
     report_id: str
     timestamp: str
-    citizen_name: str = "Anonymous"
+    citizen_name: str = "Anonymous Citizen"
     phone: str = ""
     location: Location
     description: str
@@ -93,11 +91,11 @@ class CivicReport(BaseModel):
     status: str = ReportStatus.SUBMITTED
     linked_incident_id: Optional[str] = None
     ward: str = ""
-    scenario_id: Optional[int] = None  # For demo tracking
+    scenario_id: Optional[int] = None
 
 
 class PerceptionResult(BaseModel):
-    """Output of the Perception Agent for a single report."""
+    """Output of the Perception Agent."""
     report_id: str
     issue_type: str
     severity: str
@@ -108,7 +106,7 @@ class PerceptionResult(BaseModel):
 
 
 class ClusterInfo(BaseModel):
-    """Cluster metadata from the Geo-Temporal Clustering Agent."""
+    """Cluster metadata from the Geo-Temporal Clustering Engine."""
     radius_m: float = 0.0
     time_window_days: int = 0
     center_lat: float = 0.0
@@ -123,13 +121,13 @@ class RootCause(BaseModel):
     evidence: List[str] = Field(default_factory=list)
     chain: List[str] = Field(default_factory=list)
     disclaimer: str = (
-        "AI-generated civic incident hypothesis. "
-        "Physical inspection recommended."
+        "AI-generated infrastructure incident hypothesis. "
+        "Municipal physical site inspection recommended before final dispatch."
     )
 
 
 class ImpactBreakdown(BaseModel):
-    """Detailed breakdown of the impact score components."""
+    """Multi-factor breakdown of the civic threat score."""
     severity_score: float = 0.0
     infrastructure_proximity: float = 0.0
     people_affected: float = 0.0
@@ -139,15 +137,25 @@ class ImpactBreakdown(BaseModel):
 
 
 class ImpactScore(BaseModel):
-    """Output of the Civic Impact Agent."""
+    """Output of the Civic Impact Assessment Agent."""
     score: float = 0.0
     priority: str = Priority.LOW
     breakdown: ImpactBreakdown = Field(default_factory=ImpactBreakdown)
     explanation: str = ""
 
 
+class EconomicImpact(BaseModel):
+    """Output of the Municipal Economic Savings & Resource Optimizer Agent."""
+    estimated_damage_if_neglected_inr: int = 0
+    root_cause_fix_cost_inr: int = 0
+    estimated_savings_inr: int = 0
+    prevented_road_redigging_cycles: int = 0
+    infrastructure_longevity_boost: str = "High"
+    cost_benefit_summary: str = ""
+
+
 class ResponseStep(BaseModel):
-    """A single step in a multi-department response plan."""
+    """A single sequential step in a multi-department response plan."""
     step_number: int
     department: str
     department_name: str = ""
@@ -155,6 +163,8 @@ class ResponseStep(BaseModel):
     reason: str = ""
     estimated_hours: int = 0
     depends_on: List[int] = Field(default_factory=list)
+    resources: List[str] = Field(default_factory=list)
+    issues: List[str] = Field(default_factory=list)
 
 
 class ResponsePlan(BaseModel):
@@ -167,7 +177,7 @@ class ResponsePlan(BaseModel):
 
 
 class Resolution(BaseModel):
-    """Resolution evidence and verification result."""
+    """Resolution verification audit contract."""
     before_photo: str = ""
     after_photo: str = ""
     before_gps: Optional[Location] = None
@@ -189,10 +199,7 @@ class SLA(BaseModel):
 
 
 class AgentLogEntry(BaseModel):
-    """
-    A single agent log entry.
-    Every AI decision displays: DECISION → EVIDENCE USED → CONFIDENCE → RECOMMENDED ACTION.
-    """
+    """Explainable AI audit trail."""
     timestamp: str
     agent: str
     message: str
@@ -202,13 +209,10 @@ class AgentLogEntry(BaseModel):
     recommended_action: str = ""
 
 
-# ─── Core shared state ──────────────────────────────────────────────────────────
+# ─── Unified Shared State ───────────────────────────────────────────────────────
 
 class IncidentContext(BaseModel):
-    """
-    The single shared state object that every agent reads and writes.
-    The Orchestrator is the sole writer to disk.
-    """
+    """The central unified state contract for CivicNexus AI."""
     incident_id: str
     status: str = IncidentStatus.SUBMITTED
     classification: str = IncidentClassification.INDEPENDENT_COMPLAINTS
@@ -219,17 +223,18 @@ class IncidentContext(BaseModel):
     perception_results: List[PerceptionResult] = Field(default_factory=list)
     root_cause: RootCause = Field(default_factory=RootCause)
     impact_score: ImpactScore = Field(default_factory=ImpactScore)
+    economic_impact: EconomicImpact = Field(default_factory=EconomicImpact)
     response_plan: ResponsePlan = Field(default_factory=ResponsePlan)
     resolution: Resolution = Field(default_factory=Resolution)
     sla: SLA = Field(default_factory=SLA)
     agent_log: List[AgentLogEntry] = Field(default_factory=list)
-    scenario_id: Optional[int] = None  # For demo tracking
+    scenario_id: Optional[int] = None
 
 
-# ─── API request/response models ────────────────────────────────────────────────
+# ─── API Requests / Responses ───────────────────────────────────────────────────
 
 class SubmitReportRequest(BaseModel):
-    citizen_name: str = "Anonymous"
+    citizen_name: str = "Anonymous Citizen"
     phone: str = ""
     latitude: float
     longitude: float
@@ -246,20 +251,15 @@ class SubmitReportResponse(BaseModel):
     timestamp: str
 
 
-class AnalyzeReportResponse(BaseModel):
-    report_id: str
-    perception: PerceptionResult
-    cluster_size: int
-    nearby_report_ids: List[str] = Field(default_factory=list)
-    incident_id: Optional[str] = None
-    incident_classification: Optional[str] = None
-
-
 class ResolutionSubmission(BaseModel):
     after_photo: str
     after_latitude: float
     after_longitude: float
     notes: str = ""
+
+
+class AdvanceDemoTimeRequest(BaseModel):
+    hours: int = 72
 
 
 class DashboardStats(BaseModel):
@@ -270,11 +270,5 @@ class DashboardStats(BaseModel):
     resolved_incidents: int = 0
     reopened_incidents: int = 0
     escalated_incidents: int = 0
+    total_estimated_savings_inr: int = 0
 
-
-class ScenarioInfo(BaseModel):
-    scenario_id: int
-    title: str
-    description: str
-    report_ids: List[str] = Field(default_factory=list)
-    incident_id: Optional[str] = None

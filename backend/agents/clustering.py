@@ -1,5 +1,5 @@
-"""
-CivicIQ -- Geo-Temporal Clustering Agent
+﻿"""
+CivicNexus AI -- Geo-Temporal Clustering Agent
 Finds spatially and temporally related complaints using pure Python distance/time math.
 """
 
@@ -97,3 +97,4 @@ async def find_cluster(
         "reasoning": reasoning,
         "agent_log": agent_log,
     }
+

@@ -1,14 +1,15 @@
-# CivicIQ — Complete Project Architecture & Technical Master Notes
+# CivicNexus AI — Complete Project Architecture & Technical Master Notes
 
-> **Tagline:** *"Different complaints. One hidden signal."*  
-> **Framing Line:** *"Cities don't have a shortage of complaints. They have a shortage of intelligence connecting those complaints."*
+> **Team:** Team Nexus  
+> **Tagline:** *"Decoding Fragmented Citizen Signals into Unified Urban Intelligence."*  
+> **Framing Line:** *"Cities don't suffer from a lack of civic complaints. They suffer from isolated incident silos that mask compounding systemic infrastructure failures."*
 
 ---
 
 ## 📑 Table of Contents
 1. [Executive Summary & Core Philosophy](#1-executive-summary--core-philosophy)
 2. [Technology Stack & System Architecture](#2-technology-stack--system-architecture)
-3. [The 10 Autonomous AI Agents Deep-Dive](#3-the-10-autonomous-ai-agents-deep-dive)
+3. [The 11 Autonomous AI Agents Deep-Dive](#3-the-11-autonomous-ai-agents-deep-dive)
 4. [Mathematical Formulas & Core Algorithms](#4-mathematical-formulas--core-algorithms)
 5. [Complete REST API Specification](#5-complete-rest-api-specification)
 6. [Shared State Schema & Incident Lifecycle State Machine](#6-shared-state-schema--incident-lifecycle-state-machine)
@@ -22,19 +23,20 @@
 ## 1. Executive Summary & Core Philosophy
 
 ### The Real-World Civic Problem
-In conventional municipal complaint systems (e.g., 311 portals, civic mobile apps), complaints are processed in silos:
-- Citizen A files a complaint about a **water pipe leaking**.
-- Citizen B files a complaint about a **pothole** 50 meters away.
-- Citizen C files a complaint about **waterlogging and traffic stalls** 100 meters away.
+In conventional municipal complaint systems (e.g., 311 portals, civic mobile apps), complaints are processed in isolated silos:
+- Citizen A files a complaint about an underground **water main leak**.
+- Citizen B files a complaint about **cracked asphalt road base** 40 meters away.
+- Citizen C files a complaint about a **dangerous pothole** 60 meters away.
+- Citizen D files a complaint about **waterlogging and vehicle accidents** 80 meters away.
 
-**Traditional Systems Fail Because:**
-1. Each complaint is routed independently to separate departments (Water Board, Roads Dept, Traffic Police).
-2. The Roads department patches the pothole while the pipe underneath is still leaking.
-3. The road base erodes again within 2 weeks, wasting municipal funds and causing citizen outrage.
+**Why Traditional Systems Fail:**
+1. Each complaint is routed independently to separate departments (Water Board, Roads Dept, Traffic Dept).
+2. The Roads department repaves the road over an active underground water leak.
+3. The road foundation erodes again within 2 weeks, leading to repetitive tax waste and citizen frustration.
 4. Minor isolated complaints outnumber major systemic hazards, hiding critical infrastructure cascades.
 
-### The CivicIQ Solution
-CivicIQ acts as an **Autonomous Multi-Agent Civic Incident Intelligence System**. It continuously ingests citizen complaints, runs spatial and temporal proximity clustering, traces the **underlying root cause dependency graph**, scores public threat with a **weighted impact formula**, generates a **dependency-ordered multi-department response plan**, and enforces **before/after GPS and photo verification** before closing tickets.
+### The CivicNexus AI Solution
+CivicNexus AI acts as an **Autonomous Multi-Agent Urban Incident Intelligence Matrix**. It continuously correlates independent citizen reports, traces the **underlying root-cause dependency graph**, calculates **real-time municipal tax savings** from preventative coordinated repairs, dynamically sequences department work orders, and enforces **before/after GPS and photo verification** before closing tickets.
 
 ---
 
@@ -42,7 +44,7 @@ CivicIQ acts as an **Autonomous Multi-Agent Civic Incident Intelligence System**
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│                        CIVICIQ ARCHITECTURE                            │
+│                      CIVICNEXUS AI ARCHITECTURE                        │
 └────────────────────────────────────────────────────────────────────────┘
                                    │
                   ┌────────────────┴────────────────┐
@@ -60,8 +62,8 @@ CivicIQ acts as an **Autonomous Multi-Agent Civic Incident Intelligence System**
          ┌─────────────────────────┼─────────────────────────┐
          ▼                         ▼                         ▼
 ┌──────────────────┐     ┌──────────────────┐     ┌──────────────────┐
-│  10 Autonomous   │     │ Hybrid AI Engine │     │   JSON Storage   │
-│ Pipeline Agents  │     │ (Claude / Gemini │     │    Data Layer    │
+│  11 Autonomous   │     │ Hybrid AI Engine │     │   JSON Storage   │
+│ Pipeline Agents  │     │ (Gemini / Claude │     │    Data Layer    │
 │                  │     │ / Deterministic) │     │                  │
 └──────────────────┘     └──────────────────┘     └──────────────────┘
 ```
@@ -69,8 +71,8 @@ CivicIQ acts as an **Autonomous Multi-Agent Civic Incident Intelligence System**
 ### Frontend Stack:
 - **Framework:** React 19 + TypeScript (Strict mode)
 - **Bundler / Dev Server:** Vite 8.1
-- **Styling:** Tailwind CSS v4 with modern dark theme and custom glassmorphic cards
-- **Icons:** Lucide React (`AlertCircle`, `MapPin`, `Activity`, `Play`, `CheckCircle`, etc.)
+- **Styling:** Tailwind CSS v4 with custom Obsidian/Emerald Cyber theme and glassmorphic cards
+- **Icons:** Lucide React (`Activity`, `Shield`, `Sparkles`, `TrendingUp`, `Repeat`, `AlertCircle`, etc.)
 - **Charts / Visualizations:** Recharts & SVG custom radial gauges (`ImpactGauge.tsx`)
 - **Routing:** React Router DOM v7
 - **API Communication:** Relative URL proxy through Vite reverse proxy to avoid CORS/network issues across public tunnels.
@@ -81,16 +83,16 @@ CivicIQ acts as an **Autonomous Multi-Agent Civic Incident Intelligence System**
 - **Data Validation & Schemas:** Pydantic v2
 - **Image Processing:** Pillow (PIL)
 - **AI / LLM Integration (Hybrid Multi-Tier):**
-  - *Tier 1 (Live Multimodal):* Google Gemini Vision (`gemini-1.5-flash` / `gemini_service.py`) for live uploaded images.
-  - *Tier 2 (Live Narrative):* Anthropic Claude (`claude-sonnet-4-6` / `ai_service.py`) for live reasoning synthesis.
+  - *Tier 1 (Live Multimodal Vision):* Google Gemini Multimodal Vision (`gemini_service.py`) for live uploaded photos.
+  - *Tier 2 (Live Narrative):* Anthropic Claude (`ai_service.py`) for live reasoning synthesis.
   - *Tier 3 (Deterministic Fallback):* Seed lookup table (`perception_lookup.json`) for zero-latency, 100% offline-stable hackathon demonstrations.
 - **Storage Layer:** High-speed atomic JSON persistence (`data/complaints.json`, `data/incidents.json`, `data/agent_logs.json`).
 
 ---
 
-## 3. The 10 Autonomous AI Agents Deep-Dive
+## 3. The 11 Autonomous AI Agents Deep-Dive
 
-CivicIQ coordinates 10 distinct agents. Each agent reads from and writes to a single shared `IncidentContext` data contract.
+CivicNexus coordinates 11 distinct autonomous agents:
 
 | # | Agent Name | Primary Responsibility | Input Data | Output / Decision |
 |---|------------|------------------------|------------|-------------------|
@@ -99,11 +101,12 @@ CivicIQ coordinates 10 distinct agents. Each agent reads from and writes to a si
 | **3** | **Incident Detection Agent** | Determines if the cluster is an isolated report, duplicate, or systemic multi-point incident. | Unique issue types + report count in cluster | Classification: `INDEPENDENT`, `DUPLICATE`, `POSSIBLE_CONNECTED`, or `HIGH_CONFIDENCE_CONNECTED` |
 | **4** | **Root-Cause Agent** | Traces causal dependencies across observed issues. | Observed issue types + `civic_dependencies.json` | Causal chain (`A -> B -> C -> D`), Confidence, AI Hypothesis + Mandatory Inspection Disclaimer |
 | **5** | **Civic Impact Agent** | Scores real-world public threat severity (0–100). | Severity, proximity, duration, population affected, repeat reports, secondary risks | Numerical score (0–100), Priority (`LOW`, `MEDIUM`, `HIGH`, `CRITICAL`), Factor breakdown |
-| **6** | **Response Agent** | Synthesizes a dependency-ordered multi-department action plan. | Identified issues + root cause chain + `departments.json` | Ordered list of departmental steps with SLAs, dependencies, and rationale (Human approval gate) |
-| **7** | **Municipal Filing Agent** | Generates traceable municipal tracking tickets. | Incident context + department assignments | Simulated municipal filing records (`FILE-INC-XXXX`) |
-| **8** | **SLA & Escalation Agent** | Monitors deadlines and triggers manager alerts upon SLA breach. | Incident status, SLA deadline, current/simulated time | Status transition to `ESCALATED` + Overdue breach reason |
-| **9** | **Verification Agent** | Validates resolution claims using before/after GPS and photos. | Before photo/GPS vs After photo/GPS + subsequent reports | `RESOLUTION_VERIFIED`, `LOCATION_MISMATCH`, or `POSSIBLE_FAILED_RESOLUTION` |
-| **10**| **Central Orchestrator** | Coordinates agent lifecycle and state machine persistence. | Incident context pipeline requests | Executes agents in pipeline, manages single write lock to disk |
+| **6** | **Economic Optimization Agent** *(New Original Feature)* | Calculates municipal tax savings and prevented road re-digging cycles. | Issue types + impact score + cluster density | Projected municipal tax savings (INR), Prevented excavation cycles, Longevity index |
+| **7** | **Response Agent** | Synthesizes a dependency-ordered multi-department action plan. | Identified issues + root cause chain + `departments.json` | Ordered list of departmental steps with SLAs, dependencies, and rationale (Human approval gate) |
+| **8** | **Municipal Dispatch Agent** | Generates traceable municipal tracking tickets. | Incident context + department assignments | Formal municipal dispatch work orders (`MUNI-NEXUS-[INC_ID]`) |
+| **9** | **SLA & Escalation Agent** | Monitors deadlines and triggers manager alerts upon SLA breach. | Incident status, SLA deadline, current/simulated time | Status transition to `ESCALATED` + Overdue breach reason |
+| **10**| **Verification Agent** | Validates resolution claims using before/after GPS and photos. | Before photo/GPS vs After photo/GPS + subsequent reports | `RESOLUTION_VERIFIED`, `LOCATION_MISMATCH`, or `POSSIBLE_FAILED_RESOLUTION` |
+| **11**| **Central Orchestrator** | Coordinates agent lifecycle and state machine persistence. | Incident context pipeline requests | Executes agents in pipeline, manages single write lock to disk |
 
 ---
 
@@ -126,8 +129,6 @@ $$d = R \cdot c \quad (\text{where } R = 6,371,000 \text{ meters})$$
 ### 2. Civic Impact Weighted Scoring Equation
 Used in `backend/tools/impact_tools.py` to calculate public threat priority (0 to 100):
 
-$$\text{Impact Score} = \sum (W_i \times S_i)$$
-
 $$\begin{aligned}
 \text{Impact Score} = & (0.30 \times \text{Severity}) \\
 & + (0.20 \times \text{Infrastructure Proximity}) \\
@@ -137,36 +138,22 @@ $$\begin{aligned}
 & + (0.15 \times \text{Secondary Risk})
 \end{aligned}$$
 
-#### Factor Definitions:
-1. **Severity ($30\%$)**: `CRITICAL` = 100, `HIGH` = 80, `MEDIUM` = 50, `LOW` = 25.
-2. **Infrastructure Proximity ($20\%$)**: Searches description and address for critical keywords (`hospital`, `school`, `metro`, `station`, `market`, `temple`, `bus stop`). Score = 85–100 if detected, else base 30.
-3. **People Affected ($15\%$)**: Base formula $\min(\text{report\_count} \times 15, 60) + \text{keyword boost } (30)$ for keywords like `pedestrian`, `commuter`, `traffic`, `colony`, `resident`. Max 100.
-4. **Duration ($10\%$)**: Time span of issues: $\le 1\text{d}=20$, $\le 3\text{d}=50$, $\le 7\text{d}=70$, $\le 14\text{d}=85$, $>14\text{d}=100$.
-5. **Repeat Reports ($10\%$)**: $1\text{ report}=10$, $2\text{ reports}=30$, $3\text{--}4\text{ reports}=60$, $5\text{--}6\text{ reports}=80$, $>6\text{ reports}=100$.
-6. **Secondary Risk ($15\%$)**: Risk weights mapped to issue types:
-   - `EXPOSED_WIRES` = 95 (Electrocution hazard)
-   - `SEWAGE_OVERFLOW` = 80 (Biological / Health hazard)
-   - `WATERLOGGING` = 65 (Vector breeding / Hydroplaning)
-   - `POTHOLE` = 60 (Road accidents)
-   - `WATER_LEAKAGE` = 55 (Foundation erosion)
-   - *Cascade Boost:* $+(\text{unique\_issue\_types} \times 5)$ added to reward multi-issue detection.
-
-#### Priority Thresholds:
-- **$76 - 100$:** `CRITICAL` (SLA: 12 Hours)
-- **$51 - 75$:** `HIGH` (SLA: 24 Hours)
-- **$26 - 50$:** `MEDIUM` (SLA: 48 Hours)
-- **$0 - 25$:** `LOW` (SLA: 72 Hours)
+#### Factor Weights:
+- **Severity ($30\%$):** `CRITICAL` = 100, `HIGH` = 80, `MEDIUM` = 50, `LOW` = 25.
+- **Infrastructure Proximity ($20\%$):** Scans description & address for keywords (`hospital`, `school`, `metro`, `station`, `market`, `temple`, `bus stop`). Score = 85–100 if detected, else 30.
+- **People Affected ($15\%$):** $\min(\text{report\_count} \times 15, 60) + \text{keyword boost } (30)$ for keywords like `pedestrian`, `commuter`, `traffic`, `colony`.
+- **Duration ($10\%$):** $\le 1\text{d}=20$, $\le 3\text{d}=50$, $\le 7\text{d}=70$, $\le 14\text{d}=85$, $>14\text{d}=100$.
+- **Repeat Reports ($10\%$):** $1\text{ rpt}=10$, $2\text{ rpt}=30$, $3\text{--}4\text{ rpt}=60$, $5\text{--}6\text{ rpt}=80$, $>6\text{ rpt}=100$.
+- **Secondary Risk ($15\%$):** Risk mapped to danger level: `EXPOSED_WIRES` (95), `SEWAGE_OVERFLOW` (80), `WATERLOGGING` (65), `POTHOLE` (60), `WATER_LEAKAGE` (55) $+ \text{cascade bonus}$.
 
 ---
 
-### 3. Causal Graph Traversal Algorithm
-Defined in `backend/tools/knowledge_tools.py`:
-- Reads `data/civic_dependencies.json`.
-- Builds a directed graph $G = (V, E)$ where vertices are issue types and edges are causal likelihoods and physical mechanisms.
-- Performs graph search (DFS/BFS) to identify longest connected topological chains matching observed symptoms.
-- Calculates chain confidence as the product of edge confidences:
+### 3. Economic Impact & ROI Model
+Implemented in `backend/tools/economic_tools.py`:
 
-$$\text{Confidence}_{\text{chain}} = \prod_{e \in \text{path}} \text{Confidence}(e) \times \left(\frac{|\text{Types Covered}|}{|\text{Total Types Observed}|}\right)$$
+$$\text{Estimated Damage if Neglected} = \left(\sum \text{Unit Damage Per Week} \times 4\right) \times \left(\frac{\text{Impact Score}}{50}\right) \times (1.0 + 0.1 \times \text{Report Count})$$
+$$\text{Coordinated Root Fix Cost} = \sum \text{Unit Root Repair Cost} \times 1.15$$
+$$\text{Projected Tax Savings (INR)} = \text{Estimated Damage if Neglected} - \text{Coordinated Root Fix Cost}$$
 
 ---
 
@@ -178,13 +165,14 @@ $$\text{Confidence}_{\text{chain}} = \prod_{e \in \text{path}} \text{Confidence}
 - `GET /reports/{report_id}`: Returns single report details.
 
 ### 2. Autonomous Agent Analysis Endpoints
-- `POST /analyze/{report_id}`: Triggers the full 7-stage orchestrator pipeline for a report. Returns step-by-step agent decisions, logs, and generated incident ID.
+- `POST /analyze/{report_id}`: Triggers the full 8-stage orchestrator pipeline for a report. Returns step-by-step agent decisions, logs, and generated incident ID.
 - `POST /incidents/{incident_id}/analyze`: Re-runs pipeline analysis on an existing incident.
 
 ### 3. Incident Management & Human-in-the-Loop
 - `GET /incidents`: Returns all active and resolved incidents.
-- `GET /incidents/{incident_id}`: Returns complete incident context (root cause, logs, impact, plan).
+- `GET /incidents/{incident_id}`: Returns complete incident context (root cause, logs, impact, economic model, plan).
 - `GET /incidents/{incident_id}/impact`: Returns impact score and 6-factor breakdown.
+- `GET /incidents/{incident_id}/economic-impact`: Returns municipal tax savings & longevity metrics.
 - `GET /incidents/{incident_id}/response-plan`: Returns sequenced department steps.
 - `POST /incidents/{incident_id}/approve-plan`: **Human-in-the-Loop approval gate**. Transitions status from `ASSIGNED` to `ACTION_IN_PROGRESS`.
 
@@ -194,7 +182,7 @@ $$\text{Confidence}_{\text{chain}} = \prod_{e \in \text{path}} \text{Confidence}
 - `POST /incidents/{incident_id}/advance-demo-time`: Simulates time travel ($+72\text{ hours}$) to demonstrate automated SLA breach and management escalation.
 
 ### 5. System Statistics & Developer Tools
-- `GET /dashboard/stats`: Returns real-time counts of total reports, active incidents, critical incidents, and resolved tickets.
+- `GET /dashboard/stats`: Returns real-time counts of total reports, active incidents, critical incidents, resolved tickets, and total projected municipal tax savings (INR).
 - `GET /agent-logs`: Returns audit trail logs for every agent decision.
 - `POST /dev/reset-demo`: Resets all data to clean 50-report seed state.
 - `GET /dev/scenarios`: Returns metadata for the 4 pre-configured demo scenarios.
@@ -206,10 +194,10 @@ $$\text{Confidence}_{\text{chain}} = \prod_{e \in \text{path}} \text{Confidence}
 
 ```mermaid
 stateDiagram-v2
-    [*] --> SUBMITTED : Citizen submits report
-    SUBMITTED --> UNDER_REVIEW : Perception & Clustering triggered
-    UNDER_REVIEW --> ASSIGNED : Pipeline creates Root Cause & Response Plan
-    ASSIGNED --> ACTION_IN_PROGRESS : Human Officer Approves Response Plan
+    [*] --> SUBMITTED : Citizen submits report (NX-2026-XXXX)
+    SUBMITTED --> UNDER_REVIEW : Perception & Geo-Clustering triggered
+    UNDER_REVIEW --> ASSIGNED : Pipeline creates Root Cause, Economic Model & Plan
+    ASSIGNED --> ACTION_IN_PROGRESS : Human Authority Officer Approves Response Plan
     ACTION_IN_PROGRESS --> RESOLUTION_REVIEW : Department submits After Photo + GPS
     RESOLUTION_REVIEW --> RESOLVED : Verification Agent Confirms GPS & Photo
     RESOLUTION_REVIEW --> AWAITING_RESOLUTION_EVIDENCE : Verification Rejects (Location Mismatch)
@@ -218,32 +206,25 @@ stateDiagram-v2
     RESOLVED --> REOPENED : New complaint filed at same location post-resolution
 ```
 
-### Every Agent Log Follows the 4-Point Explainable Format:
-Every action in `agent_logs.json` and UI displays:
-1. **`DECISION`**: Exactly what action the agent took.
-2. **`EVIDENCE USED`**: Raw sensor, GPS, and text facts that justified the decision.
-3. **`CONFIDENCE`**: Numerical confidence percentage ($0.0 - 1.0$).
-4. **`RECOMMENDED ACTION`**: Explicit next step for the pipeline or human operator.
-
 ---
 
 ## 7. The 4 Guaranteed Demo Scenarios & Datasets
 
-| Scenario ID | Name | Ward | Causal Chain | Expected Impact | Key Demonstration Takeaway |
+| Scenario ID | Name | Zone | Causal Chain | Expected Impact | Key Demonstration Takeaway |
 |:---:|:---|:---|:---|:---:|:---|
-| **Scenario 1** | **Water Infrastructure Cascade** *(Primary Demo)* | Ward 7 (Andheri East) | `WATER_LEAKAGE` $\to$ `ROAD_DAMAGE` $\to$ `POTHOLE` $\to$ `WATERLOGGING` | **86 / 100 (CRITICAL)** | Proves how 6 separate citizen complaints across 4 days are connected to a single broken water main. |
-| **Scenario 2** | **Drainage-Waste Cycle** | Ward 6 (Kurla) | `DRAIN_BLOCKAGE` $\to$ `WATERLOGGING` $\to$ `GARBAGE_OVERFLOW` | **72 / 100 (HIGH)** | Shows how uncleaned storm drains create recurring road flooding and garbage accumulation. |
-| **Scenario 3** | **Electrical Safety Hazard Near School** | Ward 3 (Marine Lines) | `BROKEN_STREETLIGHT` $\to$ `EXPOSED_WIRES` | **91 / 100 (CRITICAL)** | **Proves priority $\ne$ complaint count.** Only 2 reports filed, but because of high danger + school proximity, score is 91 (CRITICAL). |
-| **Scenario 4** | **Recurring Pothole Failure** | Ward 5 (Bandra West) | `POTHOLE` $\to$ `ROAD_DAMAGE` | **68 / 100 (HIGH)** | Proves the reopen & verification loop: repair was marked done, but new complaint triggers automatic reopening. |
+| **Scenario 1** | **Water Infrastructure Cascade** *(Primary Demo)* | Zone 7 (Metro Tech Corridor) | `WATER_LEAKAGE` $\to$ `ROAD_DAMAGE` $\to$ `POTHOLE` $\to$ `WATERLOGGING` | **86 / 100 (CRITICAL)** | Proves how 6 separate citizen complaints across 4 days are connected to a single broken underground pipe. Saves ₹8.4L+ in prevented road re-digging. |
+| **Scenario 2** | **Drainage-Waste Cycle** | Zone 6 (Central Transit Ring) | `DRAIN_BLOCKAGE` $\to$ `WATERLOGGING` $\to$ `GARBAGE_OVERFLOW` | **72 / 100 (HIGH)** | Shows how uncleaned storm drains create recurring road flooding and garbage accumulation. |
+| **Scenario 3** | **Electrical Safety Hazard Near School** | Zone 3 (Coastal Bay & Education Hub) | `BROKEN_STREETLIGHT` $\to$ `EXPOSED_WIRES` | **91 / 100 (CRITICAL)** | **Proves priority $\ne$ complaint count.** Only 2 reports filed, but because of lethal danger + school proximity, score is 91 (CRITICAL). |
+| **Scenario 4** | **Recurring Pothole Failure** | Zone 5 (West Bay Commercial Belt) | `POTHOLE` $\to$ `ROAD_DAMAGE` | **68 / 100 (HIGH)** | Proves the reopen & verification loop: repair was marked done, but new complaint triggers automatic reopening. |
 
 ---
 
 ## 8. Resolution Verification & Two-Beat Demo Flow
 
-A standout feature of CivicIQ is the **Two-Beat Resolution Verification**:
+A standout feature of CivicNexus is the **Two-Beat Resolution Verification**:
 
 ### Beat 1: The Mismatched Photo / Fraud Attempt
-1. An operator attempts to close `INC-2026-001` (Water Leak / Road damage) by submitting **`resolved_leak_wrong.jpg`** (which actually shows garbage).
+1. An operator attempts to close `INC-NX-2026-001` by submitting **`resolved_leak_wrong.jpg`** (which actually shows garbage).
 2. The **Verification Agent** analyzes the image and detects an issue mismatch (`GARBAGE_OVERFLOW` $\ne$ `WATER_LEAKAGE`).
 3. Outcome: **`LOCATION_MISMATCH`** with low confidence ($0.20$).
 4. Status transitions to `AWAITING_RESOLUTION_EVIDENCE` with the explicit warning:  
@@ -268,31 +249,32 @@ d:\project\hackthon\
 ├── backend/                        # FastAPI Backend Services
 │   ├── main.py                     # API routing, CORS, file serving, endpoints
 │   ├── requirements.txt            # Python dependencies
-│   ├── agents/                     # The 10 Autonomous Pipeline Agents
+│   ├── agents/                     # The 11 Autonomous Pipeline Agents
 │   │   ├── orchestrator.py         # Pipeline execution & state writing
 │   │   ├── perception.py           # Image & description perception
 │   │   ├── clustering.py           # Spatio-temporal cluster engine
 │   │   ├── incident.py             # Incident classification logic
 │   │   ├── root_cause.py           # Dependency graph causal investigator
 │   │   ├── impact.py               # 6-factor impact scoring
+│   │   ├── economic.py             # Municipal economic ROI & savings agent
 │   │   ├── response.py             # Multi-department response orchestrator
 │   │   ├── filing.py               # Municipal filing ticket synthesizer
 │   │   ├── escalation.py           # SLA state machine & time advance
 │   │   └── verification.py         # Before/after resolution verification
 │   ├── data/                       # JSON Atomic Data Persistence
-│   │   ├── complaints.json         # All 50+ citizen reports
-│   │   ├── incidents.json          # Active and historical incidents
+│   │   ├── complaints.json         # All 50+ citizen reports (NX-2026-XXXX)
+│   │   ├── incidents.json          # Active and historical incidents (INC-NX-XXXX)
 │   │   ├── agent_logs.json         # Audit logs for all agent actions
 │   │   ├── civic_dependencies.json # Domain dependency graph
 │   │   ├── departments.json        # Municipal department roles & SLAs
 │   │   ├── perception_lookup.json  # Seed image deterministic lookups
 │   │   └── scenarios.json          # Demo scenario metadata
 │   ├── models/
-│   │   └── schemas.py              # Complete Pydantic schemas & state models
+│   │   └── schemas.py              # Unified Pydantic schemas & state models
 │   ├── scripts/
-│   │   ├── seed_data.py            # Generates 50 synthetic reports across 10 wards
+│   │   ├── seed_data.py            # Generates 50 synthetic reports across 10 Smart Zones
 │   │   └── reset_demo.py           # One-command demo reset script
-│   ├── seed_images/                # 40+ synthetic civic issue photos
+│   ├── seed_images/                # 40+ civic issue photos
 │   ├── services/
 │   │   ├── ai_service.py           # Anthropic Claude narrative wrapper
 │   │   ├── gemini_service.py       # Google Gemini multimodal vision service
@@ -301,6 +283,7 @@ d:\project\hackthon\
 │       ├── geo_tools.py            # Haversine distance & centroid math
 │       ├── clustering_tools.py     # Time-window & distance filtering
 │       ├── impact_tools.py         # Weighted impact calculation engine
+│       ├── economic_tools.py       # Cost-benefit & municipal savings formula
 │       ├── incident_tools.py       # Cluster type & count classifier
 │       ├── knowledge_tools.py      # BFS/DFS causal chain graph traversal
 │       └── verification_tools.py   # GPS tolerance & complaint check
@@ -309,16 +292,17 @@ d:\project\hackthon\
     ├── index.html                  # HTML entry point
     ├── vite.config.ts              # Vite proxy to backend + allowedHosts config
     ├── src/
-    │   ├── App.tsx                 # Main layout & route declarations
+    │   ├── App.tsx                 # Modern navbar layout & route declarations
     │   ├── main.tsx                # React DOM mount point
-    │   ├── index.css               # Tailwind CSS theme & tokens
+    │   ├── index.css               # Obsidian & Emerald luxury Tailwind CSS tokens
     │   ├── lib/
     │   │   └── api.ts              # TypeScript API client & interface typings
     │   ├── pages/
-    │   │   ├── Dashboard.tsx       # Main operator command dashboard
+    │   │   ├── Dashboard.tsx       # Municipal Operations Command Dashboard
     │   │   └── CitizenReport.tsx   # Citizen complaint submission portal
     │   └── components/
-    │       ├── AgentPipeline.tsx   # 7-stage animated agent pipeline visualizer
+    │       ├── AgentPipeline.tsx   # 8-stage animated agent pipeline visualizer
+    │       ├── EconomicSavingsCard.tsx # Municipal Tax Savings & ROI card
     │       ├── ImpactGauge.tsx     # Animated SVG radial impact score gauge
     │       ├── RootCauseCard.tsx   # Causal cascade visualization card
     │       ├── ResponsePlan.tsx    # Sequenced department steps & approval gate
@@ -333,15 +317,10 @@ d:\project\hackthon\
 
 ### What Makes this Project Hackathon-Winning:
 1. **Solves a Real Municipal Blindspot:** Moves from dumb isolated tickets to intelligent root-cause infrastructure graph discovery.
-2. **Zero Presentation Flakiness:** Hybrid architecture ensures the demo never crashes even if external AI APIs hit rate limits or go offline.
-3. **Explainable AI:** No black boxes — every single decision outputs `DECISION -> EVIDENCE -> CONFIDENCE -> RECOMMENDED ACTION`.
-4. **Human-in-the-Loop:** Safety-first architecture requires human operator authorization before municipal response teams are dispatched.
-
-### Future Enterprise Extensions:
-- [ ] **Database Migration:** Upgrade JSON file storage to **PostgreSQL + PostGIS** for high-volume geospatial SQL querying.
-- [ ] **Multi-Channel Citizen Intake:** Integrate WhatsApp Business API, SMS gateway, and Telegram Bot for effortless photo submission.
-- [ ] **Municipal ERP Webhooks:** Direct bi-directional synchronization with municipal ERPs (e.g., SAP, BMC/BBMP internal civic software).
-- [ ] **Drone / Satellite Automated Inspection:** Ingest municipal drone survey imagery to detect early pavement micro-cracks before water leaks become full potholes.
+2. **Economic Proof-of-Value:** Quantifies estimated tax savings and prevented road re-digging cycles in real INR.
+3. **Zero Presentation Flakiness:** Hybrid architecture ensures the demo never crashes even if external AI APIs hit rate limits or go offline.
+4. **Explainable AI:** No black boxes — every single decision outputs `DECISION -> EVIDENCE -> CONFIDENCE -> RECOMMENDED ACTION`.
+5. **Human-in-the-Loop:** Safety-first architecture requires human operator authorization before municipal response teams are dispatched.
 
 ---
-*Created and compiled for Team Nexus — CivicIQ Autonomous Civic Incident Intelligence System.*
+*Created and compiled for Team Nexus — CivicNexus AI Autonomous Incident Intelligence Matrix.*

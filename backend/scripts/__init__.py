@@ -1,1 +1,2 @@
-# CivicIQ Scripts
+﻿# CivicNexus AI Scripts
+

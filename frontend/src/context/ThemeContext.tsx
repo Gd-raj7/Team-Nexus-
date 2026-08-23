@@ -15,13 +15,13 @@ const ThemeContext = createContext<ThemeContextValue>({
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
     // Persist preference across sessions
-    const stored = localStorage.getItem('civiciq-theme') as Theme | null;
+    const stored = localStorage.getItem('civicnexus-theme') as Theme | null;
     return stored === 'light' ? 'light' : 'dark';
   });
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('civiciq-theme', theme);
+    localStorage.setItem('civicnexus-theme', theme);
   }, [theme]);
 
   const toggleTheme = () => setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));

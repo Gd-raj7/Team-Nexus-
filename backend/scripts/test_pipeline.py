@@ -1,8 +1,8 @@
 import urllib.request
 import json
 
-# Test the full pipeline on report CIV-2026-1001 (water leakage, Scenario 1)
-req = urllib.request.Request('http://localhost:8000/analyze/CIV-2026-1001', method='POST')
+# Test the full pipeline on report NX-2026-1001 (water leakage, Scenario 1)
+req = urllib.request.Request('http://localhost:8000/analyze/NX-2026-1001', method='POST')
 r = urllib.request.urlopen(req)
 data = json.loads(r.read())
 

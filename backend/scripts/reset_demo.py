@@ -1,5 +1,5 @@
-"""
-CivicIQ -- Reset Demo Script
+﻿"""
+CivicNexus AI -- Reset Demo Script
 Restores all data to pre-demo state in one command.
 Run: python -m backend.scripts.reset_demo (from project root)
 Also exposed as POST /dev/reset-demo API route.
@@ -21,7 +21,7 @@ UPLOADS_DIR = os.path.join(BASE_DIR, "uploads")
 
 def reset_demo():
     """Reset all data to pre-demo state."""
-    print("[RESET] Resetting CivicIQ demo data...\n")
+    print("[RESET] Resetting CivicNexus AI demo data...\n")
 
     # Regenerate all seed data
     generate_seed_data()
@@ -44,3 +44,4 @@ def reset_demo():
 
 if __name__ == "__main__":
     reset_demo()
+

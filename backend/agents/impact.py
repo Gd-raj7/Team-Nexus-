@@ -1,5 +1,5 @@
-"""
-CivicIQ -- Civic Impact Agent
+﻿"""
+CivicNexus AI -- Civic Impact Agent
 Pure Python weighted scoring formula for impact assessment.
 """
 
@@ -108,3 +108,4 @@ async def assess_impact(
         "explanation": explanation,
         "agent_log": agent_log,
     }
+

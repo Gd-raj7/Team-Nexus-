@@ -1,5 +1,5 @@
-"""
-CivicIQ -- Vision Service
+﻿"""
+CivicNexus AI -- Vision Service
 Vision analysis wrapper. MVP uses deterministic lookup; stretch uses real vision model.
 """
 
@@ -30,3 +30,4 @@ Be factual and observational. Do not speculate beyond what the image shows."""
         user_prompt=prompt,
         fallback_text=fallback,
     )
+
