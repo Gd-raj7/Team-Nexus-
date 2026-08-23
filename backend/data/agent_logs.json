@@ -1,1 +1,83 @@
-{"logs": [], "total": 0}
+{
+  "logs": [
+    {
+      "agent": "PERCEPTION_AGENT",
+      "decision": "Classified as ROAD_DAMAGE, MEDIUM severity",
+      "evidence_used": [
+        "Image analysis: report_c75ddc3b.webp",
+        "Citizen report: NX-2026-1051",
+        "Visual: road surface defect matching citizen description text",
+        "Visual: visual abnormality requiring active location audit",
+        "Visual: unidentified structural decay reported"
+      ],
+      "confidence": 0.5,
+      "recommended_action": "Proceed to clustering for related reports in the area",
+      "timestamp": "2026-08-23T17:01:27.844258+05:30"
+    },
+    {
+      "agent": "CLUSTERING_AGENT",
+      "decision": "Found 0 related reports in cluster",
+      "evidence_used": [
+        "Search radius: 180.0m",
+        "Time window: 7 days",
+        "Center: (11.2729, 78.1607)",
+        "Cluster radius: 0.0m"
+      ],
+      "confidence": 0.5,
+      "recommended_action": "File as independent complaint",
+      "timestamp": "2026-08-23T17:01:27.867381+05:30"
+    },
+    {
+      "agent": "INCIDENT_DETECTION_AGENT",
+      "decision": "INDEPENDENT_COMPLAINTS",
+      "evidence_used": [
+        "Cluster size: 1 reports",
+        "Unique issue types: 1 (ROAD_DAMAGE)",
+        "Same-type reports: 1"
+      ],
+      "confidence": 0.5,
+      "recommended_action": "File as independent complaint",
+      "timestamp": "2026-08-23T17:01:27.892911+05:30"
+    },
+    {
+      "agent": "PERCEPTION_AGENT",
+      "decision": "Classified as ROAD_DAMAGE, MEDIUM severity",
+      "evidence_used": [
+        "Image analysis: report_9c9b994b.webp",
+        "Citizen report: NX-2026-1052",
+        "Visual: road surface defect matching citizen description text",
+        "Visual: visual abnormality requiring active location audit",
+        "Visual: unidentified structural decay reported"
+      ],
+      "confidence": 0.5,
+      "recommended_action": "Proceed to clustering for related reports in the area",
+      "timestamp": "2026-08-23T17:06:44.911635+05:30"
+    },
+    {
+      "agent": "CLUSTERING_AGENT",
+      "decision": "Found 1 related reports in cluster",
+      "evidence_used": [
+        "Search radius: 180.0m",
+        "Time window: 7 days",
+        "Center: (11.2729, 78.1607)",
+        "Cluster radius: 0.0m"
+      ],
+      "confidence": 0.6,
+      "recommended_action": "Proceed to incident detection",
+      "timestamp": "2026-08-23T17:06:44.950707+05:30"
+    },
+    {
+      "agent": "INCIDENT_DETECTION_AGENT",
+      "decision": "DUPLICATE_REPORTS",
+      "evidence_used": [
+        "Cluster size: 2 reports",
+        "Unique issue types: 1 (ROAD_DAMAGE)",
+        "Same-type reports: 2"
+      ],
+      "confidence": 0.7999999999999999,
+      "recommended_action": "File as independent complaint",
+      "timestamp": "2026-08-23T17:06:44.978280+05:30"
+    }
+  ],
+  "total": 6
+}

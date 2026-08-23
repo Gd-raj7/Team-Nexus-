@@ -1,1 +1,41 @@
-{"reports": []}
+{
+  "reports": [
+    {
+      "report_id": "NX-2026-1051",
+      "timestamp": "2026-08-23T17:01:03.086143+05:30",
+      "citizen_name": "rk",
+      "phone": "83488389039",
+      "location": {
+        "latitude": 11.272864,
+        "longitude": 78.160691,
+        "address": "Current Location",
+        "ward": "Ward 1 - Municipal General"
+      },
+      "description": "clean the garage",
+      "image_filename": "report_c75ddc3b.webp",
+      "status": "UNDER_REVIEW",
+      "linked_incident_id": null,
+      "ward": "Ward 1 - Municipal General",
+      "scenario_id": null
+    },
+    {
+      "report_id": "NX-2026-1052",
+      "timestamp": "2026-08-23T17:04:16.245601+05:30",
+      "citizen_name": "ranjith",
+      "phone": "876576899",
+      "location": {
+        "latitude": 11.272864,
+        "longitude": 78.160691,
+        "address": "Current Location",
+        "ward": "Ward 1 - Municipal General"
+      },
+      "description": "clean the garpage",
+      "image_filename": "report_9c9b994b.webp",
+      "status": "UNDER_REVIEW",
+      "linked_incident_id": null,
+      "ward": "Ward 1 - Municipal General",
+      "scenario_id": null
+    }
+  ],
+  "total": 2
+}
