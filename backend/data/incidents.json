@@ -1,0 +1,607 @@
+{
+  "incidents": [
+    {
+      "incident_id": "INC-2026-001",
+      "status": "UNDER_REVIEW",
+      "classification": "HIGH_CONFIDENCE_CONNECTED_INCIDENT",
+      "created_at": "2026-08-23T10:47:44.498879+05:30",
+      "updated_at": "2026-08-23T10:47:44.498879+05:30",
+      "connected_reports": [
+        "CIV-2026-1001",
+        "CIV-2026-1004",
+        "CIV-2026-1040",
+        "CIV-2026-1002",
+        "CIV-2026-1003",
+        "CIV-2026-1005",
+        "CIV-2026-1006"
+      ],
+      "cluster": {
+        "radius_m": 42.0,
+        "time_window_days": 7,
+        "center_lat": 19.119,
+        "center_lon": 72.84705714285714,
+        "report_count": 7
+      },
+      "perception_results": [
+        {
+          "report_id": "CIV-2026-1001",
+          "issue_type": "WATER_LEAKAGE",
+          "severity": "HIGH",
+          "confidence": 0.91,
+          "evidence_text": "Visible water accumulation on road surface indicating underground pipe rupture. Continuous water flow pattern suggests pressurized supply line breach. Road surface appears saturated with mineral staining consistent with prolonged water exposure.",
+          "image_filename": "leak_01.jpg",
+          "visual_evidence": [
+            "Observed defect matching category: water leakage",
+            "Observed severity level assessed as high",
+            "Visual validation matches known demographic seeds"
+          ]
+        },
+        {
+          "report_id": "CIV-2026-1004",
+          "issue_type": "WATERLOGGING",
+          "severity": "HIGH",
+          "confidence": 0.9,
+          "evidence_text": "Significant standing water on road surface, approximately ankle-deep. Visible debris floating. No drainage visible. Road damage and potholes acting as water retention basins.",
+          "image_filename": "waterlogging_01.jpg",
+          "visual_evidence": [
+            "Observed defect matching category: waterlogging",
+            "Observed severity level assessed as high",
+            "Visual validation matches known demographic seeds"
+          ]
+        },
+        {
+          "report_id": "CIV-2026-1040",
+          "issue_type": "WATER_LEAKAGE",
+          "severity": "CRITICAL",
+          "confidence": 0.94,
+          "evidence_text": "High-pressure water burst from underground main. Significant volume of water flowing onto road. Geyser-like eruption indicates major supply line failure requiring emergency response.",
+          "image_filename": "leak_05.jpg",
+          "visual_evidence": [
+            "Observed defect matching category: water leakage",
+            "Observed severity level assessed as critical",
+            "Visual validation matches known demographic seeds"
+          ]
+        },
+        {
+          "report_id": "CIV-2026-1002",
+          "issue_type": "ROAD_DAMAGE",
+          "severity": "HIGH",
+          "confidence": 0.89,
+          "evidence_text": "Extensive surface cracking with visible sub-base erosion. Crack pattern consistent with water-induced base failure. Road surface depression indicates undermining by subsurface water flow.",
+          "image_filename": "road_damage_01.jpg",
+          "visual_evidence": [
+            "Observed defect matching category: road damage",
+            "Observed severity level assessed as high",
+            "Visual validation matches known demographic seeds"
+          ]
+        },
+        {
+          "report_id": "CIV-2026-1003",
+          "issue_type": "POTHOLE",
+          "severity": "HIGH",
+          "confidence": 0.93,
+          "evidence_text": "Deep pothole approximately 60cm diameter and 30cm depth. Filled with standing muddy water. Edges showing further erosion. Located in active traffic lane with no warning markers.",
+          "image_filename": "pothole_01.jpg",
+          "visual_evidence": [
+            "Observed defect matching category: pothole",
+            "Observed severity level assessed as high",
+            "Visual validation matches known demographic seeds"
+          ]
+        },
+        {
+          "report_id": "CIV-2026-1005",
+          "issue_type": "WATER_LEAKAGE",
+          "severity": "HIGH",
+          "confidence": 0.88,
+          "evidence_text": "Active water seepage from road surface crack. Flow rate and clarity suggest potable water supply line damage. Wet zone extends approximately 5 meters from source point.",
+          "image_filename": "leak_02.jpg",
+          "visual_evidence": [
+            "Observed defect matching category: water leakage",
+            "Observed severity level assessed as high",
+            "Visual validation matches known demographic seeds"
+          ]
+        },
+        {
+          "report_id": "CIV-2026-1006",
+          "issue_type": "ROAD_DAMAGE",
+          "severity": "MEDIUM",
+          "confidence": 0.85,
+          "evidence_text": "Surface-level cracking and bitumen peeling on service road. Early-stage deterioration with multiple longitudinal cracks. No base failure visible yet.",
+          "image_filename": "road_damage_02.jpg",
+          "visual_evidence": [
+            "Observed defect matching category: road damage",
+            "Observed severity level assessed as medium",
+            "Visual validation matches known demographic seeds"
+          ]
+        }
+      ],
+      "root_cause": {
+        "hypothesis": "Root cause analysis identifies a cascading infrastructure failure: WATER_LEAKAGE -> ROAD_DAMAGE -> POTHOLE. The evidence suggests that WATER_LEAKAGE triggered a chain of downstream effects through Root cause, Prolonged water seepage weakens road sub-base and surface layers. This cascade pattern is consistent with 4 distinct issue types observed within a concentrated geographic area.",
+        "confidence": 0.58,
+        "evidence": [
+          "Root cause",
+          "Prolonged water seepage weakens road sub-base and surface layers",
+          "Damaged road surface deteriorates into potholes under traffic load"
+        ],
+        "chain": [
+          "WATER_LEAKAGE",
+          "ROAD_DAMAGE",
+          "POTHOLE"
+        ],
+        "disclaimer": "AI-generated civic incident hypothesis. Physical inspection recommended."
+      },
+      "impact_score": {
+        "score": 88.2,
+        "priority": "CRITICAL",
+        "breakdown": {
+          "severity_score": 100,
+          "infrastructure_proximity": 85,
+          "people_affected": 90,
+          "duration": 50,
+          "repeat_reports": 100,
+          "secondary_risk": 85
+        },
+        "explanation": "Impact score of 88.2/100 classified as CRITICAL. Key factors: severity at 100/100, infrastructure proximity at 85/100, and secondary risk at 85/100. The cascading nature of 4 interconnected issue types over 2.9 days significantly elevates the overall impact."
+      },
+      "response_plan": {
+        "steps": [
+          {
+            "step_number": 1,
+            "department": "STORM_WATER_DRAINAGE",
+            "department_name": "Storm Water Drainage Department",
+            "action": "Address WATERLOGGING issues",
+            "reason": "Clear garbage blocking drains before drain repair",
+            "estimated_hours": 8,
+            "depends_on": [],
+            "resources": [
+              "Drain cleaning machines",
+              "Dewatering pumps",
+              "CCTV drain inspection units",
+              "Emergency response teams"
+            ],
+            "issues": [
+              "WATERLOGGING"
+            ]
+          },
+          {
+            "step_number": 2,
+            "department": "WATER_BOARD",
+            "department_name": "Municipal Water Supply & Sewerage Board",
+            "action": "Address WATER_LEAKAGE, WATERLOGGING issues",
+            "reason": "Water supply fixes are typically root-cause and should go first",
+            "estimated_hours": 12,
+            "depends_on": [],
+            "resources": [
+              "Pipe repair crews",
+              "Emergency water tankers",
+              "Pumping equipment",
+              "Leak detection units"
+            ],
+            "issues": [
+              "WATER_LEAKAGE",
+              "WATERLOGGING"
+            ]
+          },
+          {
+            "step_number": 3,
+            "department": "ROADS_DEPT",
+            "department_name": "Roads & Infrastructure Department",
+            "action": "Address POTHOLE, ROAD_DAMAGE issues",
+            "reason": "Road repairs are wasted if underlying water/drainage issues persist",
+            "estimated_hours": 24,
+            "depends_on": [
+              "STORM_WATER_DRAINAGE",
+              "WATER_BOARD"
+            ],
+            "resources": [
+              "Asphalt paving crews",
+              "Road repair machinery",
+              "Traffic management units",
+              "Barricades and signage"
+            ],
+            "issues": [
+              "POTHOLE",
+              "ROAD_DAMAGE"
+            ]
+          }
+        ],
+        "rationale": "The response plan follows a dependency-ordered sequence to ensure root cause fixes precede downstream repairs. Emergency services prioritized due to CRITICAL severity. Road repairs are deliberately scheduled after water/drainage fixes because repairing road surfaces over an active water leak would waste resources and require re-work.",
+        "approved": false,
+        "approved_by": "",
+        "approved_at": ""
+      },
+      "resolution": {},
+      "sla": {
+        "deadline": "2026-08-23T22:47:44.580254+05:30",
+        "reminders_sent": 0,
+        "escalated": false,
+        "escalation_reason": "",
+        "original_deadline": "2026-08-23T22:47:44.580254+05:30"
+      },
+      "agent_log": []
+    },
+    {
+      "incident_id": "INC-2026-002",
+      "status": "UNDER_REVIEW",
+      "classification": "HIGH_CONFIDENCE_CONNECTED_INCIDENT",
+      "created_at": "2026-08-23T10:55:15.188017+05:30",
+      "updated_at": "2026-08-23T10:55:15.189017+05:30",
+      "connected_reports": [
+        "CIV-2026-1008",
+        "CIV-2026-1010",
+        "CIV-2026-1011",
+        "CIV-2026-1007",
+        "CIV-2026-1009"
+      ],
+      "cluster": {
+        "radius_m": 36.9,
+        "time_window_days": 7,
+        "center_lat": 19.0721,
+        "center_lon": 72.85607999999999,
+        "report_count": 5
+      },
+      "perception_results": [
+        {
+          "report_id": "CIV-2026-1008",
+          "issue_type": "WATERLOGGING",
+          "severity": "MEDIUM",
+          "confidence": 0.85,
+          "evidence_text": "Moderate waterlogging in market area. Water level reaching shop entrances. Blocked drain visible as contributing factor. Stagnant water with debris.",
+          "image_filename": "waterlogging_02.jpg",
+          "visual_evidence": [
+            "Observed defect matching category: waterlogging",
+            "Observed severity level assessed as medium",
+            "Visual validation matches known demographic seeds"
+          ]
+        },
+        {
+          "report_id": "CIV-2026-1010",
+          "issue_type": "DRAIN_BLOCKAGE",
+          "severity": "MEDIUM",
+          "confidence": 0.84,
+          "evidence_text": "Partially blocked drain near bus stop. Floating debris reducing flow capacity. Water backing up at drain inlet. Secondary blockage developing.",
+          "image_filename": "drain_02.jpg",
+          "visual_evidence": [
+            "Observed defect matching category: drain blockage",
+            "Observed severity level assessed as medium",
+            "Visual validation matches known demographic seeds"
+          ]
+        },
+        {
+          "report_id": "CIV-2026-1011",
+          "issue_type": "WATERLOGGING",
+          "severity": "HIGH",
+          "confidence": 0.88,
+          "evidence_text": "Severe stagnant water with visible algae growth indicating multi-day accumulation. Green discoloration suggests health hazard. Mosquito breeding conditions present.",
+          "image_filename": "waterlogging_03.jpg",
+          "visual_evidence": [
+            "Observed defect matching category: waterlogging",
+            "Observed severity level assessed as high",
+            "Visual validation matches known demographic seeds"
+          ]
+        },
+        {
+          "report_id": "CIV-2026-1007",
+          "issue_type": "DRAIN_BLOCKAGE",
+          "severity": "HIGH",
+          "confidence": 0.88,
+          "evidence_text": "Drain mouth completely blocked with plastic waste and construction debris. No water flow visible. Surrounding area shows water accumulation from blocked outflow.",
+          "image_filename": "drain_01.jpg",
+          "visual_evidence": [
+            "Observed defect matching category: drain blockage",
+            "Observed severity level assessed as high",
+            "Visual validation matches known demographic seeds"
+          ]
+        },
+        {
+          "report_id": "CIV-2026-1009",
+          "issue_type": "GARBAGE_OVERFLOW",
+          "severity": "MEDIUM",
+          "confidence": 0.86,
+          "evidence_text": "Overflowing garbage collection point. Mixed waste including organic and plastic. Waste mixing with waterlogged area creating contamination. Stray animals scavenging.",
+          "image_filename": "garbage_01.jpg",
+          "visual_evidence": [
+            "Observed defect matching category: garbage overflow",
+            "Observed severity level assessed as medium",
+            "Visual validation matches known demographic seeds"
+          ]
+        }
+      ],
+      "root_cause": {
+        "hypothesis": "Root cause analysis identifies a cascading infrastructure failure: GARBAGE_OVERFLOW -> DRAIN_BLOCKAGE -> WATERLOGGING. The evidence suggests that GARBAGE_OVERFLOW triggered a chain of downstream effects through Root cause, Loose garbage enters and blocks nearby drain inlets. This cascade pattern is consistent with 3 distinct issue types observed within a concentrated geographic area.",
+        "confidence": 0.68,
+        "evidence": [
+          "Root cause",
+          "Loose garbage enters and blocks nearby drain inlets",
+          "Blocked drains prevent water outflow causing surface accumulation"
+        ],
+        "chain": [
+          "GARBAGE_OVERFLOW",
+          "DRAIN_BLOCKAGE",
+          "WATERLOGGING"
+        ],
+        "disclaimer": "AI-generated civic incident hypothesis. Physical inspection recommended."
+      },
+      "impact_score": {
+        "score": 79.5,
+        "priority": "CRITICAL",
+        "breakdown": {
+          "severity_score": 80,
+          "infrastructure_proximity": 85,
+          "people_affected": 90,
+          "duration": 50,
+          "repeat_reports": 80,
+          "secondary_risk": 80
+        },
+        "explanation": "Impact score of 79.5/100 classified as CRITICAL. Key factors: severity at 80/100, infrastructure proximity at 85/100, and secondary risk at 80/100. The cascading nature of 3 interconnected issue types over 2.1 days significantly elevates the overall impact."
+      },
+      "response_plan": {
+        "steps": [
+          {
+            "step_number": 1,
+            "department": "SOLID_WASTE_MGMT",
+            "department_name": "Solid Waste Management Department",
+            "action": "Address GARBAGE_OVERFLOW, DRAIN_BLOCKAGE issues",
+            "reason": "Garbage clearance can proceed independently",
+            "estimated_hours": 12,
+            "depends_on": [],
+            "resources": [
+              "Garbage collection trucks",
+              "Mechanized sweepers",
+              "Bio-hazard cleanup teams",
+              "Waste segregation units"
+            ],
+            "issues": [
+              "GARBAGE_OVERFLOW",
+              "DRAIN_BLOCKAGE"
+            ]
+          },
+          {
+            "step_number": 2,
+            "department": "WATER_BOARD",
+            "department_name": "Municipal Water Supply & Sewerage Board",
+            "action": "Address WATERLOGGING issues",
+            "reason": "Water supply fixes are typically root-cause and should go first",
+            "estimated_hours": 12,
+            "depends_on": [],
+            "resources": [
+              "Pipe repair crews",
+              "Emergency water tankers",
+              "Pumping equipment",
+              "Leak detection units"
+            ],
+            "issues": [
+              "WATERLOGGING"
+            ]
+          },
+          {
+            "step_number": 3,
+            "department": "STORM_WATER_DRAINAGE",
+            "department_name": "Storm Water Drainage Department",
+            "action": "Address WATERLOGGING, DRAIN_BLOCKAGE issues",
+            "reason": "Clear garbage blocking drains before drain repair",
+            "estimated_hours": 8,
+            "depends_on": [
+              "SOLID_WASTE_MGMT"
+            ],
+            "resources": [
+              "Drain cleaning machines",
+              "Dewatering pumps",
+              "CCTV drain inspection units",
+              "Emergency response teams"
+            ],
+            "issues": [
+              "WATERLOGGING",
+              "DRAIN_BLOCKAGE"
+            ]
+          }
+        ],
+        "rationale": "The response plan follows a dependency-ordered sequence to ensure root cause fixes precede downstream repairs. Emergency services prioritized due to CRITICAL severity. Road repairs are deliberately scheduled after water/drainage fixes because repairing road surfaces over an active water leak would waste resources and require re-work.",
+        "approved": false,
+        "approved_by": "",
+        "approved_at": ""
+      },
+      "resolution": {},
+      "sla": {
+        "deadline": "2026-08-23T22:55:15.259018+05:30",
+        "reminders_sent": 0,
+        "escalated": false,
+        "escalation_reason": "",
+        "original_deadline": "2026-08-23T22:55:15.259018+05:30"
+      },
+      "agent_log": []
+    },
+    {
+      "incident_id": "INC-2026-003",
+      "status": "UNDER_REVIEW",
+      "classification": "HIGH_CONFIDENCE_CONNECTED_INCIDENT",
+      "created_at": "2026-08-23T10:55:38.821483+05:30",
+      "updated_at": "2026-08-23T10:55:38.821483+05:30",
+      "connected_reports": [
+        "CIV-2026-1007",
+        "CIV-2026-1009",
+        "CIV-2026-1008",
+        "CIV-2026-1011",
+        "CIV-2026-1010"
+      ],
+      "cluster": {
+        "radius_m": 36.9,
+        "time_window_days": 7,
+        "center_lat": 19.0721,
+        "center_lon": 72.85607999999999,
+        "report_count": 5
+      },
+      "perception_results": [
+        {
+          "report_id": "CIV-2026-1007",
+          "issue_type": "DRAIN_BLOCKAGE",
+          "severity": "HIGH",
+          "confidence": 0.88,
+          "evidence_text": "Drain mouth completely blocked with plastic waste and construction debris. No water flow visible. Surrounding area shows water accumulation from blocked outflow.",
+          "image_filename": "drain_01.jpg",
+          "visual_evidence": [
+            "Observed defect matching category: drain blockage",
+            "Observed severity level assessed as high",
+            "Visual validation matches known demographic seeds"
+          ]
+        },
+        {
+          "report_id": "CIV-2026-1009",
+          "issue_type": "GARBAGE_OVERFLOW",
+          "severity": "MEDIUM",
+          "confidence": 0.86,
+          "evidence_text": "Overflowing garbage collection point. Mixed waste including organic and plastic. Waste mixing with waterlogged area creating contamination. Stray animals scavenging.",
+          "image_filename": "garbage_01.jpg",
+          "visual_evidence": [
+            "Observed defect matching category: garbage overflow",
+            "Observed severity level assessed as medium",
+            "Visual validation matches known demographic seeds"
+          ]
+        },
+        {
+          "report_id": "CIV-2026-1008",
+          "issue_type": "WATERLOGGING",
+          "severity": "MEDIUM",
+          "confidence": 0.85,
+          "evidence_text": "Moderate waterlogging in market area. Water level reaching shop entrances. Blocked drain visible as contributing factor. Stagnant water with debris.",
+          "image_filename": "waterlogging_02.jpg",
+          "visual_evidence": [
+            "Observed defect matching category: waterlogging",
+            "Observed severity level assessed as medium",
+            "Visual validation matches known demographic seeds"
+          ]
+        },
+        {
+          "report_id": "CIV-2026-1011",
+          "issue_type": "WATERLOGGING",
+          "severity": "HIGH",
+          "confidence": 0.88,
+          "evidence_text": "Severe stagnant water with visible algae growth indicating multi-day accumulation. Green discoloration suggests health hazard. Mosquito breeding conditions present.",
+          "image_filename": "waterlogging_03.jpg",
+          "visual_evidence": [
+            "Observed defect matching category: waterlogging",
+            "Observed severity level assessed as high",
+            "Visual validation matches known demographic seeds"
+          ]
+        },
+        {
+          "report_id": "CIV-2026-1010",
+          "issue_type": "DRAIN_BLOCKAGE",
+          "severity": "MEDIUM",
+          "confidence": 0.84,
+          "evidence_text": "Partially blocked drain near bus stop. Floating debris reducing flow capacity. Water backing up at drain inlet. Secondary blockage developing.",
+          "image_filename": "drain_02.jpg",
+          "visual_evidence": [
+            "Observed defect matching category: drain blockage",
+            "Observed severity level assessed as medium",
+            "Visual validation matches known demographic seeds"
+          ]
+        }
+      ],
+      "root_cause": {
+        "hypothesis": "Root cause analysis identifies a cascading infrastructure failure: GARBAGE_OVERFLOW -> DRAIN_BLOCKAGE -> WATERLOGGING. The evidence suggests that GARBAGE_OVERFLOW triggered a chain of downstream effects through Root cause, Loose garbage enters and blocks nearby drain inlets. This cascade pattern is consistent with 3 distinct issue types observed within a concentrated geographic area.",
+        "confidence": 0.68,
+        "evidence": [
+          "Root cause",
+          "Loose garbage enters and blocks nearby drain inlets",
+          "Blocked drains prevent water outflow causing surface accumulation"
+        ],
+        "chain": [
+          "GARBAGE_OVERFLOW",
+          "DRAIN_BLOCKAGE",
+          "WATERLOGGING"
+        ],
+        "disclaimer": "AI-generated civic incident hypothesis. Physical inspection recommended."
+      },
+      "impact_score": {
+        "score": 79.5,
+        "priority": "CRITICAL",
+        "breakdown": {
+          "severity_score": 80,
+          "infrastructure_proximity": 85,
+          "people_affected": 90,
+          "duration": 50,
+          "repeat_reports": 80,
+          "secondary_risk": 80
+        },
+        "explanation": "Impact score of 79.5/100 classified as CRITICAL. Key factors: severity at 80/100, infrastructure proximity at 85/100, and secondary risk at 80/100. The cascading nature of 3 interconnected issue types over 2.1 days significantly elevates the overall impact."
+      },
+      "response_plan": {
+        "steps": [
+          {
+            "step_number": 1,
+            "department": "SOLID_WASTE_MGMT",
+            "department_name": "Solid Waste Management Department",
+            "action": "Address GARBAGE_OVERFLOW, DRAIN_BLOCKAGE issues",
+            "reason": "Garbage clearance can proceed independently",
+            "estimated_hours": 12,
+            "depends_on": [],
+            "resources": [
+              "Garbage collection trucks",
+              "Mechanized sweepers",
+              "Bio-hazard cleanup teams",
+              "Waste segregation units"
+            ],
+            "issues": [
+              "GARBAGE_OVERFLOW",
+              "DRAIN_BLOCKAGE"
+            ]
+          },
+          {
+            "step_number": 2,
+            "department": "WATER_BOARD",
+            "department_name": "Municipal Water Supply & Sewerage Board",
+            "action": "Address WATERLOGGING issues",
+            "reason": "Water supply fixes are typically root-cause and should go first",
+            "estimated_hours": 12,
+            "depends_on": [],
+            "resources": [
+              "Pipe repair crews",
+              "Emergency water tankers",
+              "Pumping equipment",
+              "Leak detection units"
+            ],
+            "issues": [
+              "WATERLOGGING"
+            ]
+          },
+          {
+            "step_number": 3,
+            "department": "STORM_WATER_DRAINAGE",
+            "department_name": "Storm Water Drainage Department",
+            "action": "Address WATERLOGGING, DRAIN_BLOCKAGE issues",
+            "reason": "Clear garbage blocking drains before drain repair",
+            "estimated_hours": 8,
+            "depends_on": [
+              "SOLID_WASTE_MGMT"
+            ],
+            "resources": [
+              "Drain cleaning machines",
+              "Dewatering pumps",
+              "CCTV drain inspection units",
+              "Emergency response teams"
+            ],
+            "issues": [
+              "WATERLOGGING",
+              "DRAIN_BLOCKAGE"
+            ]
+          }
+        ],
+        "rationale": "The response plan follows a dependency-ordered sequence to ensure root cause fixes precede downstream repairs. Emergency services prioritized due to CRITICAL severity. Road repairs are deliberately scheduled after water/drainage fixes because repairing road surfaces over an active water leak would waste resources and require re-work.",
+        "approved": false,
+        "approved_by": "",
+        "approved_at": ""
+      },
+      "resolution": {},
+      "sla": {
+        "deadline": "2026-08-23T22:55:38.913941+05:30",
+        "reminders_sent": 0,
+        "escalated": false,
+        "escalation_reason": "",
+        "original_deadline": "2026-08-23T22:55:38.913941+05:30"
+      },
+      "agent_log": []
+    }
+  ],
+  "total": 3
+}

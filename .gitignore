@@ -1,0 +1,16 @@
+# Dependencies & Virtual Envs
+node_modules/
+backend/venv/
+venv/
+
+# Environment
+.env
+
+# Python Cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Build
+dist/
+.vite/
