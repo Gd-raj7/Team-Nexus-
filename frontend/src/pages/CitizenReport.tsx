@@ -19,9 +19,8 @@ export default function CitizenReport() {
   const [filePreview, setFilePreview] = useState<string>('');
   const [dragActive, setDragActive] = useState(false);
 
-  // Common Report States
-  const [citizenName, setCitizenName] = useState('Anonymous');
-  const [phone, setPhone] = useState('+91-98200-11111');
+  const [citizenName, setCitizenName] = useState('');
+  const [phone, setPhone] = useState('');
   const [description, setDescription] = useState('');
   
   // Location States (explicit for Upload mode)
@@ -287,7 +286,8 @@ export default function CitizenReport() {
       };
 
       const res = await api.submitReport(payload);
-      setSubmittedReport(res);
+      // Immediately navigate to dashboard
+      navigate('/');
     } catch (err: any) {
       console.error(err);
       alert(`Submission failed: ${err.message || err}`);
@@ -310,56 +310,11 @@ export default function CitizenReport() {
       {!submittedReport ? (
         <form onSubmit={handleSubmit} style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 16 }}>
           
-          {/* Segmented Selector for Input Mode */}
-          <div style={{
-            display: 'flex',
-            background: 'var(--bg-secondary)',
-            border: '1px solid var(--border-primary)',
-            borderRadius: 8,
-            padding: 4,
-            width: 'fit-content',
-            marginBottom: 4,
-          }}>
-            <button
-              type="button"
-              className={`btn ${inputMode === 'UPLOAD' ? 'btn-primary' : 'btn-secondary'}`}
-              onClick={() => {
-                setInputMode('UPLOAD');
-                removeFile();
-                setSelectedDemoImage('');
-                setLatitude('');
-                setLongitude('');
-                setLocationName('');
-                setLocationStatus('idle');
-              }}
-              style={{ border: 'none', padding: '6px 16px', fontSize: 12 }}
-            >
-              Upload Your Photo
-            </button>
-            <button
-              type="button"
-              className={`btn ${inputMode === 'DEMO' ? 'btn-primary' : 'btn-secondary'}`}
-              onClick={() => {
-                setInputMode('DEMO');
-                removeFile();
-                setSelectedDemoImage('');
-                setLatitude('');
-                setLongitude('');
-                setLocationName('');
-                setLocationStatus('idle');
-              }}
-              style={{ border: 'none', padding: '6px 16px', fontSize: 12 }}
-            >
-              Choose Demo Image
-            </button>
-          </div>
-
           {/* UPLOAD MODE VIEW */}
-          {inputMode === 'UPLOAD' && (
-            <div className="card" style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: 'var(--text-primary)' }}>
-                Report Issue Photo
-              </label>
+          <div className="card" style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+            <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: 'var(--text-primary)' }}>
+              Report Issue Photo
+            </label>
 
               {!filePreview ? (
                 /* Drag & Drop Input Area */
@@ -469,45 +424,7 @@ export default function CitizenReport() {
                 </div>
               )}
             </div>
-          )}
-
-          {/* DEMO MODE VIEW */}
-          {inputMode === 'DEMO' && (
-            <div className="card" style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: 'var(--text-primary)' }}>
-                  Choose Demo Scenario Image
-                </label>
-                <span className="badge badge-medium" style={{ fontSize: 9 }}>DEMO MODE</span>
-              </div>
-              <div className="seed-image-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: 10 }}>
-                {images.map((img) => (
-                  <div
-                    key={img}
-                    className={`seed-image-card ${selectedDemoImage === img ? 'selected' : ''}`}
-                    onClick={() => handleSelectDemoImage(img)}
-                    style={{
-                      borderWidth: 2,
-                      borderStyle: 'solid',
-                      borderColor: selectedDemoImage === img ? 'var(--accent-blue)' : 'transparent',
-                      borderRadius: 8,
-                      overflow: 'hidden',
-                      background: 'var(--bg-primary)',
-                    }}
-                  >
-                    <img
-                      src={`${API_BASE}/seed-images/${img}`}
-                      alt={img}
-                      style={{ width: '100%', height: 90, objectFit: 'cover' }}
-                    />
-                    <div style={{ padding: 6, fontSize: 10, textAlign: 'center', color: 'var(--text-secondary)', textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
-                      {img}
-                    </div>
-                  </div>
-                ))}
-              </div>
             </div>
-          )}
 
           {/* Contact Details Card */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
