@@ -1,6 +1,7 @@
 # CivicNexus AI — Autonomous Urban Incident Intelligence Matrix
 
-> **Team:** Team Nexus  
+> **Team:** Team Nexus
+> **Team ID:** HS2026-083
 > **Tagline:** *"Decoding Fragmented Citizen Signals into Unified Urban Intelligence."*  
 > **Framing Line:** *"Cities don't suffer from a lack of civic complaints. They suffer from isolated incident silos that mask compounding systemic infrastructure failures."*
 
